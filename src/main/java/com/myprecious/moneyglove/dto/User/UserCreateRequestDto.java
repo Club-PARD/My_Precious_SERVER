@@ -1,0 +1,27 @@
+package com.myprecious.moneyglove.dto.User;
+
+import com.myprecious.moneyglove.entity.UserEntity;
+import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserCreateRequestDto {
+    private String name;
+    private String birth;
+    private String phoneNum;
+    private String gmailId;
+    private String userId;
+    public UserEntity toEntity(){
+        return UserEntity.builder()
+                .name(name)
+                .birth(birth)
+                .phoneNum(phoneNum)
+                .userId(userId)
+                .gmailId(gmailId)
+                .build();
+    } // builder 패턴으로 선언
+}
