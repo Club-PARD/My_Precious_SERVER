@@ -16,7 +16,7 @@ public class MailComponent {
         this.mailService = mailService;
     }
 
-    @Scheduled(fixedDelay = 3000) // 매일 자정마다 실행 (cron 표현식 사용)
+    @Scheduled(cron = "0 0 0 * * ?")
     public void scheduledMailSending() {
 
         // 예시: 7일 미만이면 실행
@@ -33,7 +33,7 @@ public class MailComponent {
         // 여기에 7일 미만 여부를 확인하는 로직을 작성
         // 예시: 현재 날짜와 7일 이후 날짜를 비교하여 7일 미만이면 true 반환
         LocalDate currentDate = LocalDate.now();
-        LocalDate payDate = LocalDate.of(2024,1,1);
+        LocalDate payDate = LocalDate.of(2024,1,10);
         Period period = Period.between(currentDate, payDate);
         return period.getDays() >= 7;
     }
