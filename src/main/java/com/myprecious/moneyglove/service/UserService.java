@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -31,6 +33,21 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("Database error");
+        }
+    }
+
+    // 전체 club list 출력
+    public ResponseDto<List<UserEntity>> findAll() {
+        List<UserEntity> users;
+        try {
+            users = userRepository.findAll();
+            if(users.isEmpty())
+                return ResponseDto.setFailed("리스트가 비어있습니다."); //아무것도 없을 때
+            int total = users.size();
+            return ResponseDto.setSuccess("유저 리스트 입니다",users, total);
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터 베이스 오류");
         }
     }
 }
