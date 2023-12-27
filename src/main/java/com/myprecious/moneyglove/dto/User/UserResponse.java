@@ -6,7 +6,7 @@ import lombok.Data;
 
 
 @Data
-public class UserResponseDto {
+public class UserResponse {
     private Long id;
     private String name;
     private String birth;
@@ -15,7 +15,7 @@ public class UserResponseDto {
     private String userId;
 
     @Builder
-    public UserResponseDto(UserEntity user){
+    public UserResponse(UserEntity user){
         this.id = user.getId();
         this.name = user.getName();
         this.birth = user.getBirth();
