@@ -1,7 +1,7 @@
 package com.myprecious.moneyglove.controller;
 
 import com.myprecious.moneyglove.dto.ResponseDto;
-import com.myprecious.moneyglove.dto.User.UserCreateRequestDto;
+import com.myprecious.moneyglove.dto.User.UserRequest;
 import com.myprecious.moneyglove.entity.UserEntity;
 import com.myprecious.moneyglove.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public ResponseDto<UserEntity> createUser(@RequestBody UserCreateRequestDto userRequest){
+    public ResponseDto<UserEntity> createUser(@RequestBody UserRequest userRequest){
         ResponseDto<UserEntity> result = userService.createUser(userRequest);
         return result;
     }
