@@ -1,6 +1,5 @@
 package com.myprecious.moneyglove.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,13 +23,13 @@ public class UserEntity extends BaseEntity{
 
     @Column(nullable = false, unique = true)
     private String name;
-
+    @Column(nullable = false, unique = true)
     private String birth;
-
+    @Column(nullable = false, unique = true)
     private String phoneNum;
-
+    @Column(nullable = false, unique = true)
     private String gmailId;
-
+    @Column(nullable = false, unique = true)
     private String userId;
 
     @Builder
