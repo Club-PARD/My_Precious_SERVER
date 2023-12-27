@@ -1,7 +1,6 @@
 package com.myprecious.moneyglove.dto.User;
 
 import com.myprecious.moneyglove.entity.UserEntity;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCreateRequestDto {
+public class UserRequest {
     private String name;
     private String birth;
     private String phoneNum;
