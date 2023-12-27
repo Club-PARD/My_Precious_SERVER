@@ -21,14 +21,18 @@ public class UserEntity extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+
+    @Column(nullable = false)
     private String birth;
-    @Column(nullable = false, unique = true)
+
+    @Column(nullable = false)
     private String phoneNum;
+
     @Column(nullable = false, unique = true)
     private String gmailId;
+
     @Column(nullable = false, unique = true)
     private String userId;
 
