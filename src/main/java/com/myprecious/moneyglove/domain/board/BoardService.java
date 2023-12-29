@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 public class BoardService {
@@ -53,16 +56,39 @@ public class BoardService {
         }
     }
 
-//    public ResponseDto<BoardResponse> findOne(Long boardId) {
-//        BoardResponse boardResponse;
-//        try{
-//            boardResponse = boardRepository.findById(boardId).get();
-//            return ResponseDto.setSuccess("동아리 찾기 성공!", boardResponse);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//            return ResponseDto.setFailed("데이터 베이스 오류");
-//        }
-//    }
+    public ResponseDto<List<BoardResponse>> findAll(Long userId) {
+        try {
+            // userId를 기반으로 사용자가 작성한 모든 글을 찾음
+            List<BoardEntity> userBoards = boardRepository.findByUserId(userId);
+
+            // 찾은 글들을 ResponseDto로 변환
+            List<BoardResponse> boardResponses = userBoards.stream()
+                    .map(BoardResponse::new)
+                    .collect(Collectors.toList());
+
+            if (boardResponses.isEmpty()) {
+                return ResponseDto.setFailed("작성한 글이 없습니다.");
+            }
+
+            int total = boardResponses.size();
+            return ResponseDto.setSuccess("작성한 글 목록입니다.", boardResponses, total);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터베이스 오류");
+        }
+    }
+
+
+    public ResponseDto<BoardResponse> findOne(Long boardId) {
+        try{
+            BoardEntity boardEntity = boardRepository.findById(boardId).get();
+            BoardResponse boardResponse = new BoardResponse(boardEntity);
+            return ResponseDto.setSuccess("해당 게시물 찾기 성공!", boardResponse);
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터 베이스 오류");
+        }
+    }
 
 //    @Transactional
 //    public Sheet checkSheet(Long sheetId, String clubName) {
