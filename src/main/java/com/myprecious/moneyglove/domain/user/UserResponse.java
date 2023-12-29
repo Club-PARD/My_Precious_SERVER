@@ -15,7 +15,7 @@ public class UserResponse {
     private String birth;
     private String phoneNum;
     private String gmailId;
-    private String userId;
+    private String uid;
     private List<BoardSimpleResponse> boards;
 
     @Builder
@@ -25,7 +25,7 @@ public class UserResponse {
         this.birth = user.getBirth();
         this.phoneNum = user.getPhoneNum();
         this.gmailId = user.getGmailId();
-        this.userId = user.getUserId();
+        this.uid = user.getUid();
 
         if(user.getBoards() != null){
             this.boards = user.getBoards().stream()
