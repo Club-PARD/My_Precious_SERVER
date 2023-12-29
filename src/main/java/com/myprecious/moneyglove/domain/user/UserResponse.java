@@ -1,7 +1,6 @@
-package com.myprecious.moneyglove.user;
+package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.board.BoardSimpleResponse;
-import com.myprecious.moneyglove.user.UserEntity;
+import com.myprecious.moneyglove.domain.board.BoardSimpleResponse;
 import lombok.Builder;
 import lombok.Data;
 
