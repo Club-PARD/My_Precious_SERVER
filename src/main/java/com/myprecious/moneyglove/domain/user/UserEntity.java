@@ -1,8 +1,8 @@
 package com.myprecious.moneyglove.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.myprecious.moneyglove.BaseEntity;
 import com.myprecious.moneyglove.domain.board.BoardEntity;
+import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,24 +24,26 @@ public class UserEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userId; //파이어베이스에서 받는 id 값
+    private String uid; //파이어베이스에서 받는 id 값
     private String name;
     private String birth;
     private String phoneNum;
     private String gmailId;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoardEntity> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DebtEntity> debts = new ArrayList<>();
 
     @Builder
     public UserEntity(String name, String birth, String phoneNum, String gmailId,
-                      String userId) {
+                      String uid) {
         this.name = name;
         this.birth = birth;
         this.phoneNum = phoneNum;
         this.gmailId = gmailId;
-        this.userId = userId;
+        this.uid = uid;
     }
 
     public void update(UserUpdateRequest request) {
@@ -56,7 +58,6 @@ public class UserEntity extends BaseEntity {
         if (phoneNum != null) {
             this.phoneNum = request.getPhoneNum();
         }
-
     }
 
 }

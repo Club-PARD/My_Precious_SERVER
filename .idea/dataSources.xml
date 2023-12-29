@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://awseb-e-mn3xpmzvcd-stack-awsebrdsdatabase-tpk2h2vysia1.c1a6icgc07zo.ap-northeast-2.rds.amazonaws.com:3306/ebdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="rlacofls@localhost" uuid="049d1f70-8b38-4812-8b34-d02eac61c747">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/rlacofls</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

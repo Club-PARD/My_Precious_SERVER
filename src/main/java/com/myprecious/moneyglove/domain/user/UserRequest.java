@@ -13,13 +13,13 @@ public class UserRequest {
     private String birth;
     private String phoneNum;
     private String gmailId;
-    private String userId;
+    private String uid;
     public UserEntity toEntity(){
         return UserEntity.builder()
                 .name(name)
                 .birth(birth)
                 .phoneNum(phoneNum)
-                .userId(userId)
+                .uid(uid)
                 .gmailId(gmailId)
                 .build();
     } // builder 패턴으로 선언

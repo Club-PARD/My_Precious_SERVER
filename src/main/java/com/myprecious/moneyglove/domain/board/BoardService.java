@@ -56,10 +56,10 @@ public class BoardService {
         }
     }
 
-    public ResponseDto<List<BoardResponse>> findAll(Long userId) {
+    public ResponseDto<List<BoardResponse>> findAll(Long id) {
         try {
             // userId를 기반으로 사용자가 작성한 모든 글을 찾음
-            List<BoardEntity> userBoards = boardRepository.findByUserId(userId);
+            List<BoardEntity> userBoards = boardRepository.findByUserId(id);
 
             // 찾은 글들을 ResponseDto로 변환
             List<BoardResponse> boardResponses = userBoards.stream()
