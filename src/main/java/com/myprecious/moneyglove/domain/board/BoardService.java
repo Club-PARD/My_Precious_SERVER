@@ -1,16 +1,10 @@
 package com.myprecious.moneyglove.domain.board;
 
-import com.myprecious.moneyglove.domain.board.BoardRepository;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
-import com.myprecious.moneyglove.domain.user.UserRequest;
 import com.myprecious.moneyglove.dto.ResponseDto;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
