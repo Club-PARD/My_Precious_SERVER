@@ -1,7 +1,5 @@
-package com.myprecious.moneyglove.mail;
+package com.myprecious.moneyglove.domain.mail;
 
-import com.myprecious.moneyglove.mail.MailDto;
-import com.myprecious.moneyglove.service.MailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
