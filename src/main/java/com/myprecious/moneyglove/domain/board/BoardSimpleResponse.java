@@ -1,8 +1,11 @@
-package com.myprecious.moneyglove.board;
+package com.myprecious.moneyglove.domain.board;
 
+import lombok.Data;
+
+@Data
 public class BoardSimpleResponse {
     private String title;
-    private Float borrowMoney;
+    private String borrowMoney;
     private String payDate;
     private String bank;
     private String bankAccount;
@@ -11,6 +14,7 @@ public class BoardSimpleResponse {
         this.title = board.getTitle();
         this.borrowMoney = board.getBorrowMoney();
         this.payDate = board.getPayDate();
-        this.bank = board.getBankAccount();
+        this.bank = board.getBank();
+        this.bankAccount = board.getBankAccount();
     }
 }
