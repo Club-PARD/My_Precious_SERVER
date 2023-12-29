@@ -1,6 +1,6 @@
-package com.myprecious.moneyglove.user;
+package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.user.UserEntity;
+import com.myprecious.moneyglove.domain.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
