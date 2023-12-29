@@ -9,12 +9,12 @@ import lombok.Data;
 public class UserSimpleResponse {
     private String name;
     private String gmailId;
-    private String userId;
+    private String uid;
 
     @Builder
     public UserSimpleResponse(UserEntity user) {
         this.name = user.getName();
         this.gmailId = user.getGmailId();
-        this.userId = user.getUserId();
+        this.uid = user.getUid();
     }
 }
