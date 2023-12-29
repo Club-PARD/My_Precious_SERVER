@@ -1,9 +1,7 @@
-package com.myprecious.moneyglove.controller;
+package com.myprecious.moneyglove.mail;
 
-import com.myprecious.moneyglove.dto.MailDto;
-import com.myprecious.moneyglove.dto.PayDateDto;
+import com.myprecious.moneyglove.mail.MailDto;
 import com.myprecious.moneyglove.service.MailService;
-import com.myprecious.moneyglove.test.LocalDateExample;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

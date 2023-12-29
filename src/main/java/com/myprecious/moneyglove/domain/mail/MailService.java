@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.service;
 
-import com.myprecious.moneyglove.dto.MailDto;
+import com.myprecious.moneyglove.mail.MailDto;
 import com.myprecious.moneyglove.util.MailHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;

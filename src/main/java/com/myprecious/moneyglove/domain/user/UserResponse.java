@@ -1,8 +1,12 @@
-package com.myprecious.moneyglove.dto.User;
+package com.myprecious.moneyglove.user;
 
-import com.myprecious.moneyglove.entity.UserEntity;
+import com.myprecious.moneyglove.board.BoardSimpleResponse;
+import com.myprecious.moneyglove.user.UserEntity;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -13,6 +17,7 @@ public class UserResponse {
     private String phoneNum;
     private String gmailId;
     private String userId;
+    private List<BoardSimpleResponse> boards;
 
     @Builder
     public UserResponse(UserEntity user){
@@ -22,5 +27,11 @@ public class UserResponse {
         this.phoneNum = user.getPhoneNum();
         this.gmailId = user.getGmailId();
         this.userId = user.getUserId();
+
+        if(user.getBoards() != null){
+            this.boards = user.getBoards().stream()
+                    .map(BoardSimpleResponse::new)
+                    .collect(Collectors.toList());
+        }
     }
 }

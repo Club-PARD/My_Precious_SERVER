@@ -1,13 +1,11 @@
-package com.myprecious.moneyglove.service;
+package com.myprecious.moneyglove.user;
 
 import com.myprecious.moneyglove.dto.ResponseDto;
-import com.myprecious.moneyglove.dto.User.UserRequest;
-import com.myprecious.moneyglove.entity.UserEntity;
-import com.myprecious.moneyglove.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -36,14 +34,16 @@ public class UserService {
     }
 
     // 전체 club list 출력
-    public ResponseDto<List<UserEntity>> findAll() {
-        List<UserEntity> users;
+    public ResponseDto<List<UserResponse>> findAll() {
+        List<UserResponse> userResponses;
         try {
-            users = userRepository.findAll();
-            if(users.isEmpty())
+            userResponses = userRepository.findAll().stream()
+                    .map(UserResponse::new)
+                    .collect(Collectors.toList());
+            if(userResponses.isEmpty())
                 return ResponseDto.setFailed("리스트가 비어있습니다."); //아무것도 없을 때
-            int total = users.size();
-            return ResponseDto.setSuccess("유저 리스트 입니다",users, total);
+            int total = userResponses.size();
+            return ResponseDto.setSuccess("유저 리스트 입니다",userResponses, total);
         }catch(Exception e){
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");

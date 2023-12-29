@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.entity;
+package com.myprecious.moneyglove.user;
 
+import com.myprecious.moneyglove.board.BoardEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +35,10 @@ public class UserEntity extends BaseEntity{
     private String gmailId;
 
     @Column(nullable = false, unique = true)
-    private String userId;
+    private String userId; //파이어베이스에서 받는 id 값
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<BoardEntity> boards = new ArrayList<>();
 
     @Builder
     public UserEntity(String name, String birth, String phoneNum, String gmailId,

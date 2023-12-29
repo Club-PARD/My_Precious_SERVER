@@ -1,6 +1,5 @@
-package com.myprecious.moneyglove.dto.Board;
+package com.myprecious.moneyglove.board;
 
-import com.myprecious.moneyglove.entity.BoardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,21 +10,19 @@ import lombok.NoArgsConstructor;
 public class BoardRequest {
     private String title;
     private Float borrowMoney;
-    private Integer payYear;
-    private Integer payMonth;
-    private Integer payDay;
+    private String payDate;
     private String situation;
     private String payWay;
     private String bank;
     private String bankAccount;
 
+    private String uid;
+
     public BoardEntity toEntity(){
         return BoardEntity.builder()
                 .title(title)
                 .borrowMoney(borrowMoney)
-                .payYear(payYear)
-                .payMonth(payMonth)
-                .payDay(payDay)
+                .payDate(payDate)
                 .situation(situation)
                 .payWay(payWay)
                 .bank(bank)

@@ -1,6 +1,6 @@
-package com.myprecious.moneyglove.repository;
+package com.myprecious.moneyglove.user;
 
-import com.myprecious.moneyglove.entity.UserEntity;
+import com.myprecious.moneyglove.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

@@ -1,6 +1,6 @@
-package com.myprecious.moneyglove.component;
+package com.myprecious.moneyglove.mail;
 
-import com.myprecious.moneyglove.dto.MailDto;
+import com.myprecious.moneyglove.mail.MailDto;
 import com.myprecious.moneyglove.service.MailService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
