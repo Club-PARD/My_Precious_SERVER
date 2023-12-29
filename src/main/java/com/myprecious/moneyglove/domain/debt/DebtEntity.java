@@ -5,10 +5,7 @@ import com.myprecious.moneyglove.BaseEntity;
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor
@@ -22,12 +19,29 @@ public class DebtEntity extends BaseEntity {
 
     private String lendMoney;
     private String message;
+    private String bank;
+    private String bankAccount;
 
     // 빚 상태
+    @Enumerated(EnumType.STRING)
     private DebtStatus debtStatus;
 
     // 갚은 상태
+    @Enumerated(EnumType.STRING)
     private RepaymentStatus repaymentStatus;
+
+    @Builder
+    public DebtEntity(String lendMoney, String message, String bank, String bankAccount,
+                      UserEntity user, BoardEntity board) {
+        this.lendMoney = lendMoney;
+        this.message = message;
+        this.bankAccount = bankAccount;
+        this.bank = bank;
+        this.debtStatus = DebtStatus.PENDING;
+        this.repaymentStatus = RepaymentStatus.NOT_CONFIRMED;
+        this.user = user;
+        this.board = board;
+    }
 
     public enum DebtStatus {
         PENDING("Pending"), // 아직 갚지 않은 상태
