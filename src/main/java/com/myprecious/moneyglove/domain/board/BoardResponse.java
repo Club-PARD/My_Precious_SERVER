@@ -1,11 +1,13 @@
-package com.myprecious.moneyglove.board;
+package com.myprecious.moneyglove.domain.board;
 
+import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
 import lombok.Data;
 
 @Data
 public class BoardResponse {
+    private Long id;
     private String title;
-    private Float borrowMoney;
+    private String borrowMoney;
     private String payDate;
     private String situation;
     private String payWay;
@@ -14,12 +16,14 @@ public class BoardResponse {
     private UserSimpleResponse user;
 
     public BoardResponse(BoardEntity board){
+        this.id = board.getId();
         this.title = board.getTitle();
         this.borrowMoney = board.getBorrowMoney();
         this.payDate = board.getPayDate();
         this.payWay = board.getPayWay();
         this.situation = board.getSituation();
-        this.bank = board.getBankAccount();
+        this.bank = board.getBank();
+        this.bankAccount = board.getBankAccount();
 
         if(board.getUser() != null){
             this.user = new UserSimpleResponse(board.getUser());
