@@ -22,13 +22,13 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/findAll")
+    @GetMapping("")
     public ResponseDto<List<UserResponse>> findAll() {
         ResponseDto<List<UserResponse>> result = userService.findAll();
         return result;
     }
 
-    @PatchMapping("/update/{userId}")
+    @PatchMapping("/{userId}")
     public ResponseDto<UserEntity> updateClub(@PathVariable Long userId, @RequestBody UserUpdateRequest request) {
         ResponseDto<UserEntity> result = userService.updateUser(userId, request);
         return result;
