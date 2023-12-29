@@ -19,10 +19,11 @@ public class UserService {
     }
 
     public ResponseDto<UserEntity> createUser(UserRequest userRequest) {
-        String userId = userRequest.getUserId();
+        String uid = userRequest.getUid();
+
         try {
-            if (userRepository.existsByUserId(userId)) {
-                UserEntity existedUser = userRepository.findByUserId(userId);
+            if (userRepository.existsByUid(uid)) {
+                UserEntity existedUser = userRepository.findByUid(uid);
                 return ResponseDto.setFailed("같은 아이디의 유저 존재함. 이미 가입된 유저", existedUser);
             }
             UserEntity userEntity = userRequest.toEntity();
@@ -44,7 +45,7 @@ public class UserService {
             if(userResponses.isEmpty())
                 return ResponseDto.setFailed("리스트가 비어있습니다."); //아무것도 없을 때
             int total = userResponses.size();
-            return ResponseDto.setSuccess("유저 리스트 입니다",userResponses, total);
+            return ResponseDto.setSuccess("유저 리스트 입니다", userResponses, total);
         }catch(Exception e){
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
