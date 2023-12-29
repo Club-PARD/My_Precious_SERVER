@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.board;
+package com.myprecious.moneyglove.domain.board;
 
+import com.myprecious.moneyglove.domain.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,24 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardRequest {
     private String title;
-    private Float borrowMoney;
+    private String borrowMoney;
     private String payDate;
     private String situation;
     private String payWay;
     private String bank;
     private String bankAccount;
-
-    private String uid;
-
-    public BoardEntity toEntity(){
-        return BoardEntity.builder()
-                .title(title)
-                .borrowMoney(borrowMoney)
-                .payDate(payDate)
-                .situation(situation)
-                .payWay(payWay)
-                .bank(bank)
-                .bankAccount(bankAccount)
-                .build();
-    }
 }
