@@ -61,8 +61,7 @@ public class UserService {
             if (!userRepository.existsById(uId)) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
-//            if(!request.getName().isEmpty())
-            if (StringUtils.hasText(request.getName()))
+            if (!StringUtils.hasText(request.getName()))
                 user.setName(request.getName()); //이름 수정
             if (isBirth(request))
                 user.setBirth(request.getBirth()); // 생일 수정
