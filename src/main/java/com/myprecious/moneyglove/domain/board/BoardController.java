@@ -13,14 +13,14 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/{userId}")
-    public ResponseDto<BoardResponse> createBoard(@PathVariable final Long userId, @RequestBody final BoardRequest request){
-        ResponseDto<BoardResponse> result = boardService.createBoard(userId, request);
+    @PostMapping("/{uId}")
+    public ResponseDto<BoardResponse> createBoard(@PathVariable final String uId, @RequestBody final BoardRequest request){
+        ResponseDto<BoardResponse> result = boardService.createBoard(uId, request);
         return result;
     }
-    @GetMapping("/users/{userId}")
-    public ResponseDto<List<BoardResponse>> findAll(@PathVariable Long userId){
-        ResponseDto<List<BoardResponse>> result = boardService.findAll(userId);
+    @GetMapping("/users/{uId}")
+    public ResponseDto<List<BoardResponse>> findAll(@PathVariable String uId){
+        ResponseDto<List<BoardResponse>> result = boardService.findAll(uId);
         return result;
     }
     @GetMapping("/{boardId}")

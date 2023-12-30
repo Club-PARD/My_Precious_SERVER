@@ -39,9 +39,10 @@ public class BoardEntity extends BaseEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_uid", referencedColumnName = "uid")
     @JsonIgnore
     private UserEntity user;
+
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DebtEntity> debts = new ArrayList<>();

@@ -22,9 +22,9 @@ public class BoardService {
         this.userRepository = userRepository;
     }
 
-    public ResponseDto<BoardResponse> createBoard(Long id, BoardRequest request) {
+    public ResponseDto<BoardResponse> createBoard(String uid, BoardRequest request) {
         try {
-            UserEntity user = userRepository.findById(id).get();
+            UserEntity user = userRepository.findById(uid).get();
             BoardEntity board = BoardEntity.builder()
                     .title(request.getTitle())
                     .situation(request.getSituation())
@@ -50,10 +50,10 @@ public class BoardService {
         }
     }
 
-    public ResponseDto<List<BoardResponse>> findAll(Long id) {
+    public ResponseDto<List<BoardResponse>> findAll(String uid) {
         try {
             // userId를 기반으로 사용자가 작성한 모든 글을 찾음
-            List<BoardEntity> userBoards = boardRepository.findByUserId(id);
+            List<BoardEntity> userBoards = boardRepository.findByUser_Uid(uid);
 
             // 찾은 글들을 ResponseDto로 변환
             List<BoardResponse> boardResponses = userBoards.stream()
