@@ -1,5 +1,6 @@
 package com.myprecious.moneyglove.domain.board;
 
+import com.myprecious.moneyglove.domain.debt.DebtLendMoneyResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static sun.jvm.hotspot.runtime.BasicObjectLock.size;
 
 @Slf4j
 @Service
@@ -24,7 +27,8 @@ public class BoardService {
 
     public ResponseDto<BoardResponse> createBoard(String uid, BoardRequest request) {
         try {
-            UserEntity user = userRepository.findById(uid).get();
+            UserEntity user = userRepository.findByUid(uid);
+
             BoardEntity board = BoardEntity.builder()
                     .title(request.getTitle())
                     .situation(request.getSituation())
@@ -36,6 +40,7 @@ public class BoardService {
                     .statuses("NOT_RECEIVED")
                     .user(user)
                     .build();
+
             try{
                 boardRepository.save(board);
                 BoardResponse result = new BoardResponse(board);
@@ -76,7 +81,7 @@ public class BoardService {
     public ResponseDto<BoardResponse> findOne(Long boardId) {
         try{
             BoardEntity boardEntity = boardRepository.findById(boardId).get();
-            BoardResponse boardResponse = new BoardResponse(boardEntity);
+            BoardResponse boardResponse = new BoardResponse(boardEntity);;
             return ResponseDto.setSuccess("해당 게시물 찾기 성공!", boardResponse);
         }catch(Exception e){
             e.printStackTrace();
@@ -84,22 +89,5 @@ public class BoardService {
         }
     }
 
-//    @Transactional
-//    public Sheet checkSheet(Long sheetId, String clubName) {
-//        Sheet sheet = sheetRepository.findById(sheetId)
-//                .orElseThrow(() -> new IllegalArgumentException("시트가 존재하지 않습니다."));
-//
-//        if (sheet.isChecked()) {
-//            throw new IllegalStateException("이미 빌려진 시트입니다.");
-//        }
-//
-//        Club club = clubRepository.findByName(clubName)
-//                .orElseThrow(() -> new IllegalArgumentException("동아리가 존재하지 않습니다."));
-//
-//        sheet.setClub(club);
-//        club.getCheckedSheet().add(sheet);
-//
-//        return sheetRepository.save(sheet);
-//    }
 
 }
