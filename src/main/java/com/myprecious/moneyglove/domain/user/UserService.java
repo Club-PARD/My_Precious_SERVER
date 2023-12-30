@@ -58,7 +58,7 @@ public class UserService {
         UserEntity user;
         try{
             user = userRepository.findByUid(uId);
-            if (!userRepository.existsByUid(uId)) {
+            if (!userRepository.existsById(uId)) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
 //            if(!request.getName().isEmpty())
