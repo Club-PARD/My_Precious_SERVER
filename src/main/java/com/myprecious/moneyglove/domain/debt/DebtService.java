@@ -45,7 +45,7 @@ public class DebtService {
                 DebtResponse result = new DebtResponse(debt);
                 return ResponseDto.setSuccess("친구 응원 성공", result);
             } catch (Exception e) {
-                log.error("실패!: {}",e);
+                log.error("실패!: {}", e);
                 return ResponseDto.setFailed("DB Error - 친구 돕기 실패");
             }
         } catch (Exception e) {
@@ -97,7 +97,4 @@ public class DebtService {
             return ResponseDto.setFailed("데이터베이스 오류");
         }
     }
-
-    //findAll-user의 전체
-    //findOne-해당 debtㄴㅐ
 }
