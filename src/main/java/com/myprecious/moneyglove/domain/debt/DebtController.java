@@ -22,8 +22,14 @@ public class DebtController {
     }
 
     @GetMapping("/boards/{boardId}")
-    public ResponseDto<List<DebtResponse>> findAll(@PathVariable Long boardId){
-        ResponseDto<List<DebtResponse>> result = debtService.findAll(boardId);
+    public ResponseDto<List<DebtResponse>> findAllByBoard(@PathVariable Long boardId){
+        ResponseDto<List<DebtResponse>> result = debtService.findAllByBoard(boardId);
+        return result;
+    }
+
+    @GetMapping("/users/{uId}")
+    public ResponseDto<List<DebtResponse>> findAllByUser(@PathVariable String uId){
+        ResponseDto<List<DebtResponse>> result = debtService.findAllByUser(uId);
         return result;
     }
 }
