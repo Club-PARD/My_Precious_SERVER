@@ -1,10 +1,6 @@
 package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.domain.user.UserResponse;
-import com.myprecious.moneyglove.dto.ResponseDto;
-import com.myprecious.moneyglove.domain.user.UserRequest;
-import com.myprecious.moneyglove.domain.user.UserEntity;
-import com.myprecious.moneyglove.domain.user.UserService;
+import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

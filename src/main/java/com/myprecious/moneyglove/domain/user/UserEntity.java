@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.BaseEntity;
+import com.myprecious.moneyglove.common.BaseEntity;
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import jakarta.persistence.*;
