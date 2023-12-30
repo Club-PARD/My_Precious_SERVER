@@ -1,11 +1,11 @@
 package com.myprecious.moneyglove.domain.debt;
 
-import com.myprecious.moneyglove.domain.board.BoardRequest;
+import com.myprecious.moneyglove.common.ResponseDto;
 import com.myprecious.moneyglove.domain.board.BoardResponse;
-import com.myprecious.moneyglove.domain.board.BoardService;
-import com.myprecious.moneyglove.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,6 +18,12 @@ public class DebtController {
                                                  @PathVariable final Long boardId,
                                                  @RequestBody final DebtRequest request){
         ResponseDto<DebtResponse> result = debtService.createDebt(uId, boardId, request);
+        return result;
+    }
+
+    @GetMapping("/boards/{boardId}")
+    public ResponseDto<List<DebtResponse>> findAll(@PathVariable Long boardId){
+        ResponseDto<List<DebtResponse>> result = debtService.findAll(boardId);
         return result;
     }
 }
