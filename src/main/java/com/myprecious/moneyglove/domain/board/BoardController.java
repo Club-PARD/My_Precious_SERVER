@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.board;
 
-import com.myprecious.moneyglove.dto.ResponseDto;
+import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

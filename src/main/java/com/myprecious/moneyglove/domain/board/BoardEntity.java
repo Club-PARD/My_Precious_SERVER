@@ -1,7 +1,7 @@
 package com.myprecious.moneyglove.domain.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myprecious.moneyglove.BaseEntity;
+import com.myprecious.moneyglove.common.BaseEntity;
 import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import jakarta.persistence.*;
@@ -9,10 +9,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

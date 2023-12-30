@@ -2,7 +2,7 @@ package com.myprecious.moneyglove.domain.board;
 
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
-import com.myprecious.moneyglove.dto.ResponseDto;
+import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
