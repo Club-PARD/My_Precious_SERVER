@@ -14,7 +14,8 @@ public class UserRequest {
     private String phoneNum;
     private String gmailId;
     private String uid;
-    public UserEntity toEntity(){
+
+    public UserEntity toEntity() {
         return UserEntity.builder()
                 .name(name)
                 .birth(birth)

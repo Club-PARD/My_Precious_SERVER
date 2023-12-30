@@ -43,11 +43,11 @@ public class UserService {
             userResponses = userRepository.findAll().stream()
                     .map(UserResponse::new)
                     .collect(Collectors.toList());
-            if(userResponses.isEmpty())
+            if (userResponses.isEmpty())
                 return ResponseDto.setFailed("리스트가 비어있습니다."); //아무것도 없을 때
             int total = userResponses.size();
             return ResponseDto.setSuccess("유저 리스트 입니다", userResponses, total);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
@@ -56,22 +56,22 @@ public class UserService {
     @Transactional
     public ResponseDto<UserEntity> updateUser(String uId, UserUpdateRequest request) {
         UserEntity user;
-        try{
+        try {
             user = userRepository.findByUid(uId);
             if (!userRepository.existsById(uId)) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
 //            if(!request.getName().isEmpty())
-            if(StringUtils.hasText(request.getName()))
+            if (StringUtils.hasText(request.getName()))
                 user.setName(request.getName()); //이름 수정
-            if(isBirth(request))
+            if (isBirth(request))
                 user.setBirth(request.getBirth()); // 생일 수정
-            if(request.getPhoneNum() != null)
+            if (request.getPhoneNum() != null)
                 user.setPhoneNum(request.getPhoneNum()); // 생일 수정
             user.update(request);
             return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", user);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }

@@ -18,14 +18,14 @@ public class UserResponse {
     private List<BoardSimpleResponse> boards;
 
     @Builder
-    public UserResponse(UserEntity user){
+    public UserResponse(UserEntity user) {
         this.uid = user.getUid();
         this.name = user.getName();
         this.birth = user.getBirth();
         this.phoneNum = user.getPhoneNum();
         this.gmailId = user.getGmailId();
 
-        if(user.getBoards() != null){
+        if (user.getBoards() != null) {
             this.boards = user.getBoards().stream()
                     .map(BoardSimpleResponse::new)
                     .collect(Collectors.toList());

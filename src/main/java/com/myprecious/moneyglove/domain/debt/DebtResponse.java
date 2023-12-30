@@ -25,7 +25,7 @@ public class DebtResponse {
     private UserSimpleResponse user;
     private BoardSimpleResponse board;
 
-    public DebtResponse(DebtEntity debt){
+    public DebtResponse(DebtEntity debt) {
         this.id = debt.getId();
         this.lendMoney = debt.getLendMoney();
         this.message = debt.getMessage();

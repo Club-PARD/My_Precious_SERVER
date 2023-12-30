@@ -13,22 +13,23 @@ import java.util.List;
 public class DebtController {
 
     private final DebtService debtService;
+
     @PostMapping("/boards/{boardId}/users/{uId}")
     public ResponseDto<DebtResponse> createBoard(@PathVariable final String uId,
                                                  @PathVariable final Long boardId,
-                                                 @RequestBody final DebtRequest request){
+                                                 @RequestBody final DebtRequest request) {
         ResponseDto<DebtResponse> result = debtService.createDebt(uId, boardId, request);
         return result;
     }
 
     @GetMapping("/boards/{boardId}")
-    public ResponseDto<List<DebtResponse>> findAllByBoard(@PathVariable Long boardId){
+    public ResponseDto<List<DebtResponse>> findAllByBoard(@PathVariable Long boardId) {
         ResponseDto<List<DebtResponse>> result = debtService.findAllByBoard(boardId);
         return result;
     }
 
     @GetMapping("/users/{uId}")
-    public ResponseDto<List<DebtResponse>> findAllByUser(@PathVariable String uId){
+    public ResponseDto<List<DebtResponse>> findAllByUser(@PathVariable String uId) {
         ResponseDto<List<DebtResponse>> result = debtService.findAllByUser(uId);
         return result;
     }

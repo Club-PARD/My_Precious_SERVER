@@ -20,7 +20,6 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity extends BaseEntity {
 
-
     @Id
     private String uid; //파이어베이스에서 받는 id 값
 

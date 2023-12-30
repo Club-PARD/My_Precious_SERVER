@@ -22,7 +22,7 @@ public class BoardResponse {
     private UserSimpleResponse user;
     private List<DebtLendMoneyResponse> debts;
 
-    public BoardResponse(BoardEntity board){
+    public BoardResponse(BoardEntity board) {
         this.id = board.getId();
         this.title = board.getTitle();
         this.borrowMoney = board.getBorrowMoney();
@@ -32,11 +32,11 @@ public class BoardResponse {
         this.bank = board.getBank();
         this.bankAccount = board.getBankAccount();
 
-        if(board.getUser() != null){
+        if (board.getUser() != null) {
             this.user = new UserSimpleResponse(board.getUser());
         }
 
-        if(board.getDebts() != null){
+        if (board.getDebts() != null) {
             this.debts = board.getDebts().stream()
                     .map(DebtLendMoneyResponse::new)
                     .collect(Collectors.toList());

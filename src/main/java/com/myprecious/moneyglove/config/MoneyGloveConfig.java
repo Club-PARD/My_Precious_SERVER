@@ -15,7 +15,7 @@ public class MoneyGloveConfig {
                 .info(apiInfo());
     }
 
-    private Info apiInfo(){
+    private Info apiInfo() {
         return new Info()
                 .title("My Precious Money Glove")//E
                 .description("돈 내놔")

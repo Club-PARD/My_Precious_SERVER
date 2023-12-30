@@ -13,7 +13,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("")
-    public ResponseDto<UserEntity> createUser(@RequestBody UserRequest userRequest){
+    public ResponseDto<UserEntity> createUser(@RequestBody UserRequest userRequest) {
         ResponseDto<UserEntity> result = userService.createUser(userRequest);
         return result;
     }

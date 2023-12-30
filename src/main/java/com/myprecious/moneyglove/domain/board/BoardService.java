@@ -39,11 +39,11 @@ public class BoardService {
                     .user(user)
                     .build();
 
-            try{
+            try {
                 boardRepository.save(board);
                 BoardResponse result = new BoardResponse(board);
-                return ResponseDto.setSuccess("Successfully create posting",result);
-            } catch (Exception e){
+                return ResponseDto.setSuccess("Successfully create posting", result);
+            } catch (Exception e) {
                 e.printStackTrace();
                 return ResponseDto.setFailed("DB Error - Failed to create posting.");
             }
@@ -77,11 +77,12 @@ public class BoardService {
 
 
     public ResponseDto<BoardResponse> findOne(Long boardId) {
-        try{
+        try {
             BoardEntity boardEntity = boardRepository.findById(boardId).get();
-            BoardResponse boardResponse = new BoardResponse(boardEntity);;
+            BoardResponse boardResponse = new BoardResponse(boardEntity);
+            ;
             return ResponseDto.setSuccess("해당 게시물 찾기 성공!", boardResponse);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
