@@ -1,4 +1,4 @@
-package com.myprecious.moneyglove;
+package com.myprecious.moneyglove.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
