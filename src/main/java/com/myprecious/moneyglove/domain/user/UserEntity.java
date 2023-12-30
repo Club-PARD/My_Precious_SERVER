@@ -20,11 +20,13 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
+    @Id
     private String uid; //파이어베이스에서 받는 id 값
+
     private String name;
     private String birth;
     private String phoneNum;

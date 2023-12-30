@@ -28,9 +28,9 @@ public class UserController {
         return result;
     }
 
-    @PatchMapping("/{userId}")
-    public ResponseDto<UserEntity> updateClub(@PathVariable Long userId, @RequestBody UserUpdateRequest request) {
-        ResponseDto<UserEntity> result = userService.updateUser(userId, request);
+    @PatchMapping("/{uId}")
+    public ResponseDto<UserEntity> updateClub(@PathVariable String uId, @RequestBody UserUpdateRequest request) {
+        ResponseDto<UserEntity> result = userService.updateUser(uId, request);
         return result;
     }
 }

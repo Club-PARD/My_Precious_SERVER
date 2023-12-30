@@ -50,4 +50,8 @@ public class DebtSevice {
             return ResponseDto.setFailed("board 없음");
         }
     }
+
+    //findAll-board의 전체
+    //findAll-user의 전체
+    //findOne-해당 debtㄴㅐ용
 }

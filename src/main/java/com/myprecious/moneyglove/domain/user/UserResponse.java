@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Data
 public class UserResponse {
-    private Long id;
     private String name;
     private String birth;
     private String phoneNum;
@@ -20,12 +19,11 @@ public class UserResponse {
 
     @Builder
     public UserResponse(UserEntity user){
-        this.id = user.getId();
+        this.uid = user.getUid();
         this.name = user.getName();
         this.birth = user.getBirth();
         this.phoneNum = user.getPhoneNum();
         this.gmailId = user.getGmailId();
-        this.uid = user.getUid();
 
         if(user.getBoards() != null){
             this.boards = user.getBoards().stream()

@@ -53,11 +53,11 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseDto<UserEntity> updateUser(Long id, UserUpdateRequest request) {
+    public ResponseDto<UserEntity> updateUser(String uId, UserUpdateRequest request) {
         UserEntity user;
         try{
-            user = userRepository.findById(id).get();
-            if (!userRepository.existsById(id)) {
+            user = userRepository.findByUid(uId);
+            if (!userRepository.existsByUid(uId)) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
             if(!request.getName().isEmpty())
