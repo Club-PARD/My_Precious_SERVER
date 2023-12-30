@@ -5,7 +5,7 @@ import com.myprecious.moneyglove.domain.board.BoardRepository;
 import com.myprecious.moneyglove.domain.board.BoardResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
-import com.myprecious.moneyglove.dto.ResponseDto;
+import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,27 +54,27 @@ public class DebtService {
         }
     }
 
-//    public ResponseDto<List<DebtResponse>> findAll(Long boardId) {
-//        try {
-//            // userId를 기반으로 사용자가 작성한 모든 글을 찾음
-//            List<BoardEntity> userBoards = boardRepository.findByUserId(id);
-//
-//            // 찾은 글들을 ResponseDto로 변환
-//            List<BoardResponse> boardResponses = userBoards.stream()
-//                    .map(BoardResponse::new)
-//                    .collect(Collectors.toList());
-//
-//            if (boardResponses.isEmpty()) {
-//                return ResponseDto.setFailed("작성한 글이 없습니다.");
-//            }
-//
-//            int total = boardResponses.size();
-//            return ResponseDto.setSuccess("작성한 글 목록입니다.", boardResponses, total);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseDto.setFailed("데이터베이스 오류");
-//        }
-//    }
+    public ResponseDto<List<DebtResponse>> findAll(Long boardId) {
+        try {
+            // boardId를 기반으로 해당 보드에 작성된 모든 응원 기록
+            List<DebtEntity> debts = debtRepository.findByBoardId(boardId);
+
+            // 찾은 글들을 ResponseDto로 변환
+            List<DebtResponse> debtResponses = debts.stream()
+                    .map(DebtResponse::new)
+                    .collect(Collectors.toList());
+
+            if (debtResponses.isEmpty()) {
+                return ResponseDto.setFailed("작성한 글이 없습니다.");
+            }
+
+            int total = debtResponses.size();
+            return ResponseDto.setSuccess("작성한 글 목록입니다.", debtResponses, total);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터베이스 오류");
+        }
+    }
     //findAll-board의 전체
     //findAll-user의 전체
     //findOne-해당 debtㄴㅐ
