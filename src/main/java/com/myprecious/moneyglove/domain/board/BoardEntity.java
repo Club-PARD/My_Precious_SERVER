@@ -35,7 +35,6 @@ public class BoardEntity extends BaseEntity {
     private String bankAccount;
     private String statuses;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_uid", referencedColumnName = "uid")
     @JsonIgnore
