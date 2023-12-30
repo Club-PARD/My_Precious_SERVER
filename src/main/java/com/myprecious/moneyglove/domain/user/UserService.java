@@ -1,9 +1,10 @@
 package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.dto.ResponseDto;
+import com.myprecious.moneyglove.common.ResponseDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,9 +61,10 @@ public class UserService {
             if (!userRepository.existsByUid(uId)) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
-            if(!request.getName().isEmpty())
+//            if(!request.getName().isEmpty())
+            if(StringUtils.hasText(request.getName()))
                 user.setName(request.getName()); //이름 수정
-            if(request.getBirth() != null)
+            if(isBirth(request))
                 user.setBirth(request.getBirth()); // 생일 수정
             if(request.getPhoneNum() != null)
                 user.setPhoneNum(request.getPhoneNum()); // 생일 수정
@@ -73,5 +75,9 @@ public class UserService {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
+    }
+
+    private static boolean isBirth(UserUpdateRequest request) {
+        return request.getBirth() != null;
     }
 }
