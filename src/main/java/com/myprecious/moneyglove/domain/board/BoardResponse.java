@@ -1,7 +1,13 @@
 package com.myprecious.moneyglove.domain.board;
 
+import com.myprecious.moneyglove.domain.debt.DebtEntity;
+import com.myprecious.moneyglove.domain.debt.DebtLendMoneyResponse;
+import com.myprecious.moneyglove.domain.debt.DebtResponse;
 import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
 import lombok.Data;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class BoardResponse {
@@ -14,6 +20,7 @@ public class BoardResponse {
     private String bank;
     private String bankAccount;
     private UserSimpleResponse user;
+    private List<DebtLendMoneyResponse> debts;
 
     public BoardResponse(BoardEntity board){
         this.id = board.getId();
@@ -27,6 +34,12 @@ public class BoardResponse {
 
         if(board.getUser() != null){
             this.user = new UserSimpleResponse(board.getUser());
+        }
+
+        if(board.getDebts() != null){
+            this.debts = board.getDebts().stream()
+                    .map(DebtLendMoneyResponse::new)
+                    .collect(Collectors.toList());
         }
     }
 }
