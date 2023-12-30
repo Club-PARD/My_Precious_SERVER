@@ -15,12 +15,4 @@ public class DebtRequest {
     private String bank;
     private String bankAccount;
 
-//    public DebtEntity toEntity(){
-//        return DebtEntity.builder()
-//                .lendMoney(lendMoney)
-//                .message(message)
-//                .bank(bank)
-//                .bankAccount(bankAccount)
-//                .build();
-//    } // builder 패턴으로 선언
 }
