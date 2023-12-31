@@ -1,6 +1,7 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.dto.response;
 
 import com.myprecious.moneyglove.domain.board.BoardSimpleResponse;
+import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class DebtResponse {
     private RepaymentStatus repaymentStatus;
 
     private UserSimpleResponse user;
-    private BoardSimpleResponse board;
+//    private BoardSimpleResponse board;
 
     public DebtResponse(DebtEntity debt) {
         this.id = debt.getId();
