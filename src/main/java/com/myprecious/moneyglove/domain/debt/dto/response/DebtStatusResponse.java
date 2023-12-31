@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.dto.response;
 
+import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import com.myprecious.moneyglove.domain.debt.DebtEntity.DebtStatus;
 import com.myprecious.moneyglove.domain.debt.DebtEntity.RepaymentStatus;
 import lombok.AllArgsConstructor;
