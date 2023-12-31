@@ -33,6 +33,7 @@ public class BoardEntity extends BaseEntity {
     private String payWay;
     private String bank;
     private String bankAccount;
+    private Integer dDay;
     @Enumerated(EnumType.STRING)
     private BoardStatus boardStatus;
 
@@ -47,7 +48,7 @@ public class BoardEntity extends BaseEntity {
 
     @Builder
     public BoardEntity(String title, String borrowMoney, String payDate, String situation,
-                       String payWay, String bank, String bankAccount, BoardStatus boardStatus, UserEntity user) {
+                       String payWay, String bank, String bankAccount, Integer dDay, UserEntity user) {
         this.title = title;
         this.borrowMoney = borrowMoney;
         this.payDate = payDate;
@@ -56,6 +57,7 @@ public class BoardEntity extends BaseEntity {
         this.bank = bank;
         this.bankAccount = bankAccount;
         this.boardStatus = BoardStatus.NOTYET;
+        this.dDay = dDay;
         this.user = user;
     }
 
