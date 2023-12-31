@@ -33,7 +33,8 @@ public class BoardEntity extends BaseEntity {
     private String payWay;
     private String bank;
     private String bankAccount;
-    private String statuses;
+    @Enumerated(EnumType.STRING)
+    private BoardStatus boardStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_uid", referencedColumnName = "uid")
@@ -46,7 +47,7 @@ public class BoardEntity extends BaseEntity {
 
     @Builder
     public BoardEntity(String title, String borrowMoney, String payDate, String situation,
-                       String payWay, String bank, String bankAccount, String statuses, UserEntity user) {
+                       String payWay, String bank, String bankAccount, BoardStatus boardStatus, UserEntity user) {
         this.title = title;
         this.borrowMoney = borrowMoney;
         this.payDate = payDate;
@@ -54,7 +55,23 @@ public class BoardEntity extends BaseEntity {
         this.payWay = payWay;
         this.bank = bank;
         this.bankAccount = bankAccount;
-        this.statuses = statuses;
+        this.boardStatus = BoardStatus.NOTYET;
         this.user = user;
+    }
+
+    public enum BoardStatus {
+        PAIDALL("All"),
+        NOTYET("NOT");
+
+
+        private final String label;
+
+        BoardStatus(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 }
