@@ -2,10 +2,14 @@ package com.myprecious.moneyglove.domain.debt;
 
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.board.BoardRepository;
-import com.myprecious.moneyglove.domain.board.BoardResponse;
+import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
+import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
+import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
+import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,4 +101,59 @@ public class DebtService {
             return ResponseDto.setFailed("데이터베이스 오류");
         }
     }
+
+    private void updateBoardStatus(BoardEntity board) {
+        // Board의 모든 Debt가 PAID 상태이고, RepaymentStatus가 모두 CONFIRMED 상태인지 확인
+        boolean allDebtsPaidAndConfirmed = board.getDebts().stream()
+                .allMatch(debt -> debt.getDebtStatus() == DebtEntity.DebtStatus.PAID
+                        && debt.getRepaymentStatus() == DebtEntity.RepaymentStatus.CONFIRMED);
+
+        // 만약 모든 Debt가 PAID 상태이고, RepaymentStatus가 모두 CONFIRMED 상태이면 Board의 statuses를 업데이트
+        if (allDebtsPaidAndConfirmed) {
+            board.setBoardStatus(BoardEntity.BoardStatus.PAIDALL);
+            boardRepository.save(board);
+        }
+    }
+
+    public ResponseDto<DebtStatusResponse> markDebtAsPaid(DebtStatusRequest request) {
+        Long debtId = request.getId();
+        // 먼저 해당 ID로 빚 엔터티를 찾아옵니다.
+        DebtEntity debt = debtRepository.findById(debtId)
+                .orElseThrow(() -> new EntityNotFoundException("Debt not found with id: " + debtId));
+
+        // debtStatus를 PAID로 변경합니다.
+        debt.setDebtStatus(DebtEntity.DebtStatus.PAID);
+
+        // 변경된 상태를 데이터베이스에 반영합니다.
+        debtRepository.save(debt);
+
+        // 변경된 상태에 대한 응답을 생성합니다.
+        DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
+
+        // 성공적인 응답을 반환합니다.
+        return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
+    }
+
+    public ResponseDto<DebtStatusResponse> markDebtAsConfirmed(DebtStatusRequest request) {
+        Long debtId = request.getId();
+        // 먼저 해당 ID로 빚 엔터티를 찾아옵니다.
+        DebtEntity debt = debtRepository.findById(debtId)
+                .orElseThrow(() -> new EntityNotFoundException("Debt not found with id: " + debtId));
+
+        // debtStatus를 PAID로 변경합니다.
+        debt.setRepaymentStatus(DebtEntity.RepaymentStatus.CONFIRMED);
+
+        // 변경된 상태를 데이터베이스에 반영합니다.
+        debtRepository.save(debt);
+
+        // 변경된 상태에 대한 응답을 생성합니다.
+        DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
+        updateBoardStatus(debt.getBoard());
+
+        // 성공적인 응답을 반환합니다.
+        return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
+    }
+
+
+
 }
