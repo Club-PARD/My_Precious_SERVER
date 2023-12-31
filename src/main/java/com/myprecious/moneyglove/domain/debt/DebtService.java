@@ -2,10 +2,12 @@ package com.myprecious.moneyglove.domain.debt;
 
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.board.BoardRepository;
+import com.myprecious.moneyglove.domain.board.BoardResponse;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
+import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
@@ -13,6 +15,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -115,43 +118,59 @@ public class DebtService {
         }
     }
 
-    public ResponseDto<DebtStatusResponse> markDebtAsPaid(DebtStatusRequest request) {
-        Long debtId = request.getId();
-        // 먼저 해당 ID로 빚 엔터티를 찾아옵니다.
-        DebtEntity debt = debtRepository.findById(debtId)
-                .orElseThrow(() -> new EntityNotFoundException("Debt not found with id: " + debtId));
+    public ResponseDto<DebtStatusResponse> markDebtAsPaid(Long debtId) {
+        try{
+            DebtEntity debt = debtRepository.findById(debtId).get();
 
-        // debtStatus를 PAID로 변경합니다.
-        debt.setDebtStatus(DebtEntity.DebtStatus.PAID);
+            // debtStatus를 PAID로 변경합니다.
+            debt.setDebtStatus(DebtEntity.DebtStatus.PAID);
 
-        // 변경된 상태를 데이터베이스에 반영합니다.
-        debtRepository.save(debt);
+            // 변경된 상태를 데이터베이스에 반영합니다.
+            debtRepository.save(debt);
 
-        // 변경된 상태에 대한 응답을 생성합니다.
-        DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
+            // 변경된 상태에 대한 응답을 생성합니다.
+            DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
 
-        // 성공적인 응답을 반환합니다.
-        return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
+            // 성공적인 응답을 반환합니다.
+            return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터 베이스 오류");
+        }
     }
 
-    public ResponseDto<DebtStatusResponse> markDebtAsConfirmed(DebtStatusRequest request) {
-        Long debtId = request.getId();
-        // 먼저 해당 ID로 빚 엔터티를 찾아옵니다.
-        DebtEntity debt = debtRepository.findById(debtId)
-                .orElseThrow(() -> new EntityNotFoundException("Debt not found with id: " + debtId));
+    public ResponseDto<RepaymentStatusResponse> markDebtAsConfirmed(Long debtId) {
+        try{
+            DebtEntity debt = debtRepository.findById(debtId).get();
+            // debtStatus를 PAID로 변경합니다.
+            debt.setRepaymentStatus(DebtEntity.RepaymentStatus.CONFIRMED);
 
-        // debtStatus를 PAID로 변경합니다.
-        debt.setRepaymentStatus(DebtEntity.RepaymentStatus.CONFIRMED);
+            // 변경된 상태를 데이터베이스에 반영합니다.
+            debtRepository.save(debt);
 
-        // 변경된 상태를 데이터베이스에 반영합니다.
-        debtRepository.save(debt);
+            // 변경된 상태에 대한 응답을 생성합니다.
+            RepaymentStatusResponse repaymentStatusResponse = new RepaymentStatusResponse(debt);
+            updateBoardStatus(debt.getBoard());
 
-        // 변경된 상태에 대한 응답을 생성합니다.
-        DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
-        updateBoardStatus(debt.getBoard());
+            // 성공적인 응답을 반환합니다.
+            return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", repaymentStatusResponse);
 
-        // 성공적인 응답을 반환합니다.
-        return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터 베이스 오류");
+        }
+    }
+
+    public ResponseDto<DebtResponse> findOne(@PathVariable Long id){
+        try {
+            DebtEntity debtEntity = debtRepository.findById(id).get();
+            DebtResponse debtResponse = new DebtResponse(debtEntity);
+            return ResponseDto.setSuccess("해당 게시물 찾기 성공!", debtResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터 베이스 오류");
+        }
     }
 
 
