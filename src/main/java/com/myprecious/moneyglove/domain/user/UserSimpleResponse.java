@@ -1,9 +1,7 @@
 package com.myprecious.moneyglove.domain.user;
 
-import com.myprecious.moneyglove.domain.user.UserEntity;
 import lombok.Builder;
 import lombok.Data;
-
 
 @Data
 public class UserSimpleResponse {

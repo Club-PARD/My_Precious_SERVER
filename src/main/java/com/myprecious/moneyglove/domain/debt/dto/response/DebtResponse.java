@@ -35,7 +35,6 @@ public class DebtResponse {
         this.repaymentStatus = debt.getRepaymentStatus();
 
         this.user = new UserSimpleResponse(debt.getUser());
-        this.board = new BoardSimpleResponse(debt.getBoard());
     }
 
 }
