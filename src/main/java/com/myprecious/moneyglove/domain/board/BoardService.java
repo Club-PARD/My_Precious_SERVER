@@ -1,6 +1,5 @@
 package com.myprecious.moneyglove.domain.board;
 
-import com.myprecious.moneyglove.domain.debt.DebtLendMoneyResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
@@ -35,7 +34,6 @@ public class BoardService {
                     .borrowMoney(request.getBorrowMoney())
                     .bank(request.getBank())
                     .bankAccount(request.getBankAccount())
-                    .statuses("NOT_RECEIVED")
                     .user(user)
                     .build();
 
