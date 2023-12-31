@@ -5,6 +5,7 @@ import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
+import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/debts") // 공통되는 URL 묶기.
+@RequestMapping("/api/v9/debts") // 공통되는 URL 묶기.
 public class DebtController {
 
     private final DebtService debtService;
@@ -37,15 +38,21 @@ public class DebtController {
         return result;
     }
 
-    @PutMapping("/check-paid-boxes")
-    public ResponseDto<DebtStatusResponse> checkpaidbox(@RequestBody DebtStatusRequest request){
-        ResponseDto<DebtStatusResponse> result = debtService.markDebtAsPaid(request);
+    @PatchMapping("/check-paid-boxes/{debtId}")
+    public ResponseDto<DebtStatusResponse> checkpaidbox(@PathVariable Long debtId){
+        ResponseDto<DebtStatusResponse> result = debtService.markDebtAsPaid(debtId);
         return result;
     }
 
-    @PutMapping("/check-confirmed-boxes")
-    public ResponseDto<DebtStatusResponse> checkconfirmedbox(@RequestBody DebtStatusRequest request){
-        ResponseDto<DebtStatusResponse> result = debtService.markDebtAsConfirmed(request);
+    @PatchMapping("/check-confirmed-boxes/{debtId}")
+    public ResponseDto<RepaymentStatusResponse> checkconfirmedbox(@PathVariable Long debtId){
+        ResponseDto<RepaymentStatusResponse> result = debtService.markDebtAsConfirmed(debtId);
+        return result;
+    }
+
+    @GetMapping("/{debtId}")
+    public ResponseDto<DebtResponse> findone(@PathVariable Long debtId){
+        ResponseDto<DebtResponse> result = debtService.findOne(debtId);
         return result;
     }
 }
