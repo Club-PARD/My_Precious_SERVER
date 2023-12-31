@@ -8,7 +8,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/boards") // 공통되는 URL 묶기.
+@RequestMapping("/api/v9/boards") // 공통되는 URL 묶기.
 public class BoardController {
 
     private final BoardService boardService;
