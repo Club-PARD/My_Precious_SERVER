@@ -12,10 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DebtStatusResponse {
     private DebtStatus debtStatus;
-    private RepaymentStatus repaymentStatus;
 
     public DebtStatusResponse(DebtEntity debt) {
         this.debtStatus = debt.getDebtStatus();
-        this.repaymentStatus = debt.getRepaymentStatus();
     }
 }
