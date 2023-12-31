@@ -24,7 +24,6 @@ public class DebtResponse {
     private RepaymentStatus repaymentStatus;
 
     private UserSimpleResponse user;
-//    private BoardSimpleResponse board;
 
     public DebtResponse(DebtEntity debt) {
         this.id = debt.getId();
