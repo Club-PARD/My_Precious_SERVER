@@ -1,6 +1,5 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.dto.request;
 
-import com.myprecious.moneyglove.domain.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
