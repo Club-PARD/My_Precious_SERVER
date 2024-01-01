@@ -1,5 +1,9 @@
 package com.myprecious.moneyglove.domain.board;
 
+import com.myprecious.moneyglove.domain.board.dto.request.BoardRequest;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardDDayResponse;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardIdResponse;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardResponse;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
@@ -25,7 +29,7 @@ public class BoardService {
         this.userRepository = userRepository;
     }
 
-    public ResponseDto<BoardResponse> createBoard(String uid, BoardRequest request) {
+    public ResponseDto<BoardIdResponse> createBoard(String uid, BoardRequest request) {
         try {
             UserEntity user = userRepository.findByUid(uid);
 
@@ -40,10 +44,9 @@ public class BoardService {
                     .dDay(PeriodDays(request.getPayDate()))
                     .user(user)
                     .build();
-
             try {
                 boardRepository.save(board);
-                BoardResponse result = new BoardResponse(board);
+                BoardIdResponse result = new BoardIdResponse(board);
                 return ResponseDto.setSuccess("Successfully create posting", result);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -97,6 +100,17 @@ public class BoardService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
+        }
+    }
+
+    public ResponseDto<BoardDDayResponse> returnDDay(Long boardId){
+        try{
+            BoardEntity boardEntity = boardRepository.findById(boardId).get();
+            BoardDDayResponse boardDDayResponse = new BoardDDayResponse(boardEntity);
+            return ResponseDto.setSuccess("해당 게시물의 d-day", boardDDayResponse);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseDto.setFailed("db 오류");
         }
     }
 
