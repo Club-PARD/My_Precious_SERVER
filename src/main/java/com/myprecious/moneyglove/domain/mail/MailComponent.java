@@ -2,6 +2,7 @@ package com.myprecious.moneyglove.domain.mail;
 
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.board.BoardRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static com.myprecious.moneyglove.domain.board.BoardEntity.BoardStatus.NOTYET;
 
+@Slf4j
 @Component
 public class MailComponent {
     private final MailService mailService;
@@ -24,10 +26,13 @@ public class MailComponent {
     }
 
     @Scheduled(fixedRate = 30000)
-    public void updateDday(){
-        BoardEntity board = boardRepository.findByBoardStatus(NOTYET);
-        board.setDDay(board.getDDay()-1);
-        boardRepository.save(board);
+    public void updateDday() {
+        List<BoardEntity> boards = boardRepository.findByBoardStatus(BoardEntity.BoardStatus.NOTYET);
+
+        for (BoardEntity board : boards) {
+            board.setDDay(board.getDDay() - 1);
+            boardRepository.save(board);
+        }
     }
 
     @Scheduled(fixedRate = 30000)
@@ -38,56 +43,25 @@ public class MailComponent {
         // 추가적으로 다른 D-day에 대한 메일을 보내는 경우도 여기에 추가할 수 있습니다.
     }
 
-    private void sendMailForDday(int dday, String title, String message) {
-        List<BoardEntity> boards = boardRepository.findByDDay(dday);
+    private void sendMailForDday(Integer dDay, String title, String message) {
+        List<BoardEntity> boards = boardRepository.findBydDay(dDay);
 
         for (BoardEntity board : boards) {
-            MailDto mailDto = new MailDto();
-            mailDto.setAddress(board.getUser().getGmailId());
-            mailDto.setTitle(title);
-            mailDto.setMessage(message);
-            mailService.mailSend(mailDto);
+            log.info("Gmail ID: {}", board.getUser().getGmailId());
+
+            // Check if the board has associated debts
+            if (!board.getDebts().isEmpty()) {
+                // Handle the case where debts are associated with the board
+                log.info("Board with ID {} has associated debts. Sending mail...", board.getId());
+                MailDto mailDto = new MailDto();
+                mailDto.setAddress(board.getUser().getGmailId());
+                mailDto.setTitle(title);
+                mailDto.setMessage(message + " (Debts associated with the board: " + board.getDebts().size() + ")");
+                mailService.mailSend(mailDto);
+            } else {
+                // Handle the case where there are no associated debts
+                log.info("Board with ID {} has no associated debts.", board.getId());
+            }
         }
     }
-
-//
-//    @Scheduled(cron = "0 0 0 * * ?")
-//    public void scheduledMailSending() {
-//        // 객체 생성 및 payDate 값 가져오기
-//
-//        BoardService boardService = null;
-////        String boardPayDate = boardService.getBoardPayDate();
-////        String address = boardService.getBoardUserGmailId();
-//
-//        if (PeriodDays(boardPayDate) == 3) {
-//            MailDto mailDto = new MailDto();
-//            mailDto.setAddress(address);
-//            mailDto.setTitle("[D-3] 돈 보낼 준비하셈");
-//            mailDto.setMessage("3일 남음 ㅅㄱ");
-//            mailService.mailSend(mailDto);
-//        }
-//        if (PeriodDays(boardPayDate) == 0) {
-//            MailDto mailDto = new MailDto();
-//            mailDto.setAddress(address);
-//            mailDto.setTitle("[D-Day] 돈 보내세요~~");
-//            mailDto.setMessage("오늘임!!!");
-//            mailService.mailSend(mailDto);
-//        }
-//        if (PeriodDays(boardPayDate) < 0) {
-//            MailDto mailDto = new MailDto();
-//            mailDto.setAddress(address);
-//            mailDto.setTitle("날짜가 지났습니다!!!!!!!!!!");
-//            mailDto.setMessage("빨리!!!!!!!!!!!");
-//            mailService.mailSend(mailDto);
-//        }
-//    }
-//
-//    private Integer PeriodDays(String boardpayDate) {
-//        LocalDate currentDate = LocalDate.now();
-//        LocalDate payDate = LocalDate.parse(boardpayDate, formatter);
-//        // 날짜 차이 계산
-//        Period period = Period.between(currentDate, payDate);
-//
-//        return period.getDays();
-//    }
 }
