@@ -5,6 +5,7 @@ import com.myprecious.moneyglove.domain.board.BoardRepository;
 import com.myprecious.moneyglove.domain.board.BoardResponse;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
+import com.myprecious.moneyglove.domain.debt.dto.response.DebtIdResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusResponse;
@@ -34,7 +35,7 @@ public class DebtService {
         this.userRepository = userRepository;
     }
 
-    public ResponseDto<DebtResponse> createDebt(String uId, Long boardId, DebtRequest request) {
+    public ResponseDto<DebtIdResponse> createDebt(String uId, Long boardId, DebtRequest request) {
         UserEntity user = userRepository.findByUid(uId);
         BoardEntity board = boardRepository.findById(boardId).get();
         try {
@@ -49,7 +50,7 @@ public class DebtService {
                     .build();
             try {
                 debtRepository.save(debt);
-                DebtResponse result = new DebtResponse(debt);
+                DebtIdResponse result = new DebtIdResponse(debt);
                 return ResponseDto.setSuccess("친구 응원 성공", result);
             } catch (Exception e) {
                 log.error("실패!: {}", e);
@@ -119,7 +120,7 @@ public class DebtService {
     }
 
     public ResponseDto<DebtStatusResponse> markDebtAsPaid(Long debtId) {
-        try{
+        try {
             DebtEntity debt = debtRepository.findById(debtId).get();
 
             // debtStatus를 PAID로 변경합니다.
@@ -134,35 +135,34 @@ public class DebtService {
             // 성공적인 응답을 반환합니다.
             return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
     }
 
     public ResponseDto<RepaymentStatusResponse> markDebtAsConfirmed(Long debtId) {
-        try{
+        try {
             DebtEntity debt = debtRepository.findById(debtId).get();
-            // debtStatus를 PAID로 변경합니다.
             debt.setRepaymentStatus(DebtEntity.RepaymentStatus.CONFIRMED);
 
-            // 변경된 상태를 데이터베이스에 반영합니다.
+            // 변경된 상태를 데이터베이스에 반영
             debtRepository.save(debt);
 
-            // 변경된 상태에 대한 응답을 생성합니다.
+            // 변경된 상태에 대한 응답을 생성
             RepaymentStatusResponse repaymentStatusResponse = new RepaymentStatusResponse(debt);
             updateBoardStatus(debt.getBoard());
 
-            // 성공적인 응답을 반환합니다.
+            // 성공적인 응답을 반환
             return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", repaymentStatusResponse);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
     }
 
-    public ResponseDto<DebtResponse> findOne(@PathVariable Long id){
+    public ResponseDto<DebtResponse> findOne(@PathVariable Long id) {
         try {
             DebtEntity debtEntity = debtRepository.findById(id).get();
             DebtResponse debtResponse = new DebtResponse(debtEntity);
@@ -172,7 +172,4 @@ public class DebtService {
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
     }
-
-
-
 }
