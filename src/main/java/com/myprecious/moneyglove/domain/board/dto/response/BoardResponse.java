@@ -19,6 +19,7 @@ public class BoardResponse {
     private String bank;
     private String bankAccount;
     private Integer dDay;
+    private BoardEntity.BoardStatus boardStatus;
     private UserSimpleResponse user;
     private List<DebtLendMoneyResponse> debts;
 
@@ -32,6 +33,7 @@ public class BoardResponse {
         this.bank = board.getBank();
         this.bankAccount = board.getBankAccount();
         this.dDay = board.getDDay();
+        this.boardStatus = board.getBoardStatus();
 
         if (board.getUser() != null) {
             this.user = new UserSimpleResponse(board.getUser());
