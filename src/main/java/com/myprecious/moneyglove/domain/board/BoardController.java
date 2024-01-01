@@ -1,6 +1,10 @@
 package com.myprecious.moneyglove.domain.board;
 
 import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.domain.board.dto.request.BoardRequest;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardDDayResponse;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardIdResponse;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +18,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/{uId}")
-    public ResponseDto<BoardResponse> createBoard(@PathVariable final String uId, @RequestBody final BoardRequest request) {
-        ResponseDto<BoardResponse> result = boardService.createBoard(uId, request);
+    public ResponseDto<BoardIdResponse> createBoard(@PathVariable final String uId, @RequestBody final BoardRequest request) {
+        ResponseDto<BoardIdResponse> result = boardService.createBoard(uId, request);
         return result;
     }
 
@@ -28,6 +32,12 @@ public class BoardController {
     @GetMapping("/{boardId}")
     public ResponseDto<BoardResponse> findOne(@PathVariable Long boardId) {
         ResponseDto<BoardResponse> result = boardService.findOne(boardId);
+        return result;
+    }
+
+    @GetMapping("/d-day/{boardId}")
+    public ResponseDto<BoardDDayResponse> returnDDay(@PathVariable Long boarId){
+        ResponseDto<BoardDDayResponse> result = boardService.returnDDay(boarId);
         return result;
     }
 }
