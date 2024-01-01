@@ -9,16 +9,11 @@ import org.springframework.stereotype.Component;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static com.myprecious.moneyglove.domain.board.BoardEntity.BoardStatus.NOTYET;
-
 @Slf4j
 @Component
 public class MailComponent {
     private final MailService mailService;
     private final BoardRepository boardRepository;
-
-    // 날짜 포맷 정의
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public MailComponent(MailService mailService, BoardRepository boardRepository) {
         this.mailService = mailService;
