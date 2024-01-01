@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,7 @@ public class BoardService {
                     .borrowMoney(request.getBorrowMoney())
                     .bank(request.getBank())
                     .bankAccount(request.getBankAccount())
+                    .dDay(PeriodDays(request.getPayDate()))
                     .user(user)
                     .build();
 
@@ -49,6 +53,18 @@ public class BoardService {
             e.printStackTrace();
             return ResponseDto.setFailed("유저 엄슴");
         }
+    }
+
+    //d-day 계산
+    private Integer PeriodDays(String boardpayDate) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate payDate = LocalDate.parse(boardpayDate, formatter);
+        // 날짜 차이 계산
+        Period period = Period.between(currentDate, payDate);
+
+        return period.getDays();
     }
 
     public ResponseDto<List<BoardResponse>> findAll(String uid) {
@@ -73,18 +89,15 @@ public class BoardService {
         }
     }
 
-
     public ResponseDto<BoardResponse> findOne(Long boardId) {
         try {
             BoardEntity boardEntity = boardRepository.findById(boardId).get();
             BoardResponse boardResponse = new BoardResponse(boardEntity);
-            ;
             return ResponseDto.setSuccess("해당 게시물 찾기 성공!", boardResponse);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
         }
     }
-
 
 }
