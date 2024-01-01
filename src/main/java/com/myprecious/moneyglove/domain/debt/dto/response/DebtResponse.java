@@ -1,5 +1,7 @@
 package com.myprecious.moneyglove.domain.debt.dto.response;
 
+import com.myprecious.moneyglove.domain.board.dto.response.BoardResponse;
+import com.myprecious.moneyglove.domain.board.dto.response.BoardSimpleResponse;
 import com.myprecious.moneyglove.domain.debt.DebtEntity;
 import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class DebtResponse {
     private String bankAccount;
     private DebtStatus debtStatus;
     private RepaymentStatus repaymentStatus;
-
+    private BoardResponse board;
     private UserSimpleResponse user;
 
     public DebtResponse(DebtEntity debt) {
@@ -31,7 +33,7 @@ public class DebtResponse {
         this.bankAccount = debt.getBankAccount();
         this.debtStatus = debt.getDebtStatus();
         this.repaymentStatus = debt.getRepaymentStatus();
-
+        this.board = new BoardResponse(debt.getBoard());
         this.user = new UserSimpleResponse(debt.getUser());
     }
 
