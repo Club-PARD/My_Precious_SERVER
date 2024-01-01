@@ -2,9 +2,7 @@ package com.myprecious.moneyglove.domain.debt;
 
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.board.BoardRepository;
-import com.myprecious.moneyglove.domain.board.BoardResponse;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
-import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtIdResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
@@ -12,7 +10,6 @@ import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusRespons
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
