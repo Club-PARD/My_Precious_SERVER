@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.domain.board;
+package com.myprecious.moneyglove.domain.board.dto.response;
 
+import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtLendMoneyResponse;
 import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class BoardResponse {
     private String payWay;
     private String bank;
     private String bankAccount;
+    private Integer dDay;
     private UserSimpleResponse user;
     private List<DebtLendMoneyResponse> debts;
 
@@ -29,6 +31,7 @@ public class BoardResponse {
         this.situation = board.getSituation();
         this.bank = board.getBank();
         this.bankAccount = board.getBankAccount();
+        this.dDay = board.getDDay();
 
         if (board.getUser() != null) {
             this.user = new UserSimpleResponse(board.getUser());
