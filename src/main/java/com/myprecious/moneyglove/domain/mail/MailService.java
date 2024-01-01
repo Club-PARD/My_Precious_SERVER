@@ -28,7 +28,7 @@ public class MailService {
             // 첨부 파일
             mailHandler.setAttach("newTest.txt", "static/originTest.txt");
             // 이미지 삽입
-            mailHandler.setInline("sample-img", "static/sample1.jpg");
+            mailHandler.setInline("sample-img", "static/moneyglove.png");
 
             mailHandler.send();
         }
