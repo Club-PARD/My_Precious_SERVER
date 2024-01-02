@@ -1,9 +1,9 @@
-package com.myprecious.moneyglove.domain.board;
+package com.myprecious.moneyglove.domain.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.myprecious.moneyglove.common.BaseEntity;
-import com.myprecious.moneyglove.domain.debt.DebtEntity;
-import com.myprecious.moneyglove.domain.user.UserEntity;
+import com.myprecious.moneyglove.domain.debt.entity.DebtEntity;
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

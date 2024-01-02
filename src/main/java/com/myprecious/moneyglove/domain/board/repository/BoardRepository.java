@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.domain.board;
+package com.myprecious.moneyglove.domain.board.repository;
 
+import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

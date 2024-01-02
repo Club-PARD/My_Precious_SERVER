@@ -1,12 +1,14 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.service;
 
-import com.myprecious.moneyglove.domain.board.BoardEntity;
-import com.myprecious.moneyglove.domain.board.BoardRepository;
+import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
+import com.myprecious.moneyglove.domain.board.repository.BoardRepository;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.*;
-import com.myprecious.moneyglove.domain.mail.MailService;
-import com.myprecious.moneyglove.domain.user.UserEntity;
-import com.myprecious.moneyglove.domain.user.UserRepository;
+import com.myprecious.moneyglove.domain.debt.entity.DebtEntity;
+import com.myprecious.moneyglove.domain.debt.repository.DebtRepository;
+import com.myprecious.moneyglove.domain.mail.service.MailService;
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
+import com.myprecious.moneyglove.domain.user.repository.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

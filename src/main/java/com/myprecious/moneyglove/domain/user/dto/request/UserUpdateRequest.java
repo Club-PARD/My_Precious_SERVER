@@ -1,4 +1,4 @@
-package com.myprecious.moneyglove.domain.user;
+package com.myprecious.moneyglove.domain.user.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

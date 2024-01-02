@@ -1,7 +1,7 @@
 //package com.myprecious.moneyglove.domain.mail;
 //
-//import com.myprecious.moneyglove.domain.board.BoardEntity;
-//import com.myprecious.moneyglove.domain.board.BoardRepository;
+//import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
+//import com.myprecious.moneyglove.domain.board.repository.BoardRepository;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.stereotype.Component;

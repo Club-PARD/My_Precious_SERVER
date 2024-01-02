@@ -1,18 +1,19 @@
-package com.myprecious.moneyglove.domain.board;
+package com.myprecious.moneyglove.domain.board.service;
 
+import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
+import com.myprecious.moneyglove.domain.board.repository.BoardRepository;
 import com.myprecious.moneyglove.domain.board.dto.request.BoardRequest;
 import com.myprecious.moneyglove.domain.board.dto.response.BoardDDayResponse;
 import com.myprecious.moneyglove.domain.board.dto.response.BoardIdResponse;
 import com.myprecious.moneyglove.domain.board.dto.response.BoardResponse;
-import com.myprecious.moneyglove.domain.user.UserEntity;
-import com.myprecious.moneyglove.domain.user.UserRepository;
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
+import com.myprecious.moneyglove.domain.user.repository.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;

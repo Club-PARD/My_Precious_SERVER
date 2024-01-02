@@ -1,11 +1,10 @@
-package com.myprecious.moneyglove.domain.mail;
+package com.myprecious.moneyglove.domain.mail.controller;
 
 import com.myprecious.moneyglove.common.ResponseDto;
-import com.myprecious.moneyglove.domain.user.UserEntity;
-import com.myprecious.moneyglove.domain.user.UserRequest;
-import lombok.AllArgsConstructor;
+import com.myprecious.moneyglove.domain.mail.dto.request.MailDto;
+import com.myprecious.moneyglove.domain.mail.dto.response.MailResponseDto;
+import com.myprecious.moneyglove.domain.mail.service.MailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

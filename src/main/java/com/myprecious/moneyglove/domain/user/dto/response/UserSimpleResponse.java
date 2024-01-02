@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.domain.user;
+package com.myprecious.moneyglove.domain.user.dto.response;
 
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
 import lombok.Builder;
 import lombok.Data;
 

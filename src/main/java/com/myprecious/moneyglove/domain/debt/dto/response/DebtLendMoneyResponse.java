@@ -1,9 +1,7 @@
 package com.myprecious.moneyglove.domain.debt.dto.response;
 
-import com.myprecious.moneyglove.domain.debt.DebtEntity;
+import com.myprecious.moneyglove.domain.debt.entity.DebtEntity;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class DebtLendMoneyResponse {

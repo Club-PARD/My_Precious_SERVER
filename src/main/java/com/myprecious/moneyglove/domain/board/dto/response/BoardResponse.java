@@ -1,8 +1,8 @@
 package com.myprecious.moneyglove.domain.board.dto.response;
 
-import com.myprecious.moneyglove.domain.board.BoardEntity;
+import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
 import com.myprecious.moneyglove.domain.debt.dto.response.DebtLendMoneyResponse;
-import com.myprecious.moneyglove.domain.user.UserSimpleResponse;
+import com.myprecious.moneyglove.domain.user.dto.response.UserSimpleResponse;
 import lombok.Data;
 
 import java.util.List;

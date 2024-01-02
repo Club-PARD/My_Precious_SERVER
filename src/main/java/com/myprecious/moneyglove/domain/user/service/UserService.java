@@ -1,6 +1,11 @@
-package com.myprecious.moneyglove.domain.user;
+package com.myprecious.moneyglove.domain.user.service;
 
 import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.domain.user.repository.UserRepository;
+import com.myprecious.moneyglove.domain.user.dto.request.UserRequest;
+import com.myprecious.moneyglove.domain.user.dto.request.UserUpdateRequest;
+import com.myprecious.moneyglove.domain.user.dto.response.UserResponse;
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,11 @@
-package com.myprecious.moneyglove.domain.user;
+package com.myprecious.moneyglove.domain.user.controller;
 
 import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.domain.user.dto.request.UserRequest;
+import com.myprecious.moneyglove.domain.user.dto.request.UserUpdateRequest;
+import com.myprecious.moneyglove.domain.user.dto.response.UserResponse;
+import com.myprecious.moneyglove.domain.user.entity.UserEntity;
+import com.myprecious.moneyglove.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,5 +1,6 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.repository;
 
+import com.myprecious.moneyglove.domain.debt.entity.DebtEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

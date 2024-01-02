@@ -1,8 +1,8 @@
-package com.myprecious.moneyglove.domain.debt;
+package com.myprecious.moneyglove.domain.debt.controller;
 
 import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.domain.debt.service.DebtService;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
-import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
