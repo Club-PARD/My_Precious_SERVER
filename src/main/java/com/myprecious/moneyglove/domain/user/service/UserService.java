@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.user.service;
 
-import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.common.dto.ResponseDto;
 import com.myprecious.moneyglove.domain.user.repository.UserRepository;
 import com.myprecious.moneyglove.domain.user.dto.request.UserRequest;
 import com.myprecious.moneyglove.domain.user.dto.request.UserUpdateRequest;

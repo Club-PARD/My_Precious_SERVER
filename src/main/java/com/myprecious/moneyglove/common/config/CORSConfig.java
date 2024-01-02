@@ -1,4 +1,4 @@
-package com.myprecious.moneyglove.config;
+package com.myprecious.moneyglove.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

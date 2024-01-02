@@ -1,4 +1,4 @@
-package com.myprecious.moneyglove.common;
+package com.myprecious.moneyglove.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

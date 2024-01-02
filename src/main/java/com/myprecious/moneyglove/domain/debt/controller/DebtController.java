@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.debt.controller;
 
-import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.common.dto.ResponseDto;
 import com.myprecious.moneyglove.domain.debt.service.DebtService;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.response.*;

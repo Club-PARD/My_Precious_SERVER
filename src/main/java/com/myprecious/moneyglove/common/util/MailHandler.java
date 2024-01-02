@@ -1,4 +1,4 @@
-package com.myprecious.moneyglove.util;
+package com.myprecious.moneyglove.common.util;
 
 
 

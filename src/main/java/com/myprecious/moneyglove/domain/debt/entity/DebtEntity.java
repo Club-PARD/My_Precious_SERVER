@@ -1,7 +1,7 @@
 package com.myprecious.moneyglove.domain.debt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myprecious.moneyglove.common.BaseEntity;
+import com.myprecious.moneyglove.common.entity.BaseEntity;
 import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
 import com.myprecious.moneyglove.domain.user.entity.UserEntity;
 import jakarta.persistence.*;

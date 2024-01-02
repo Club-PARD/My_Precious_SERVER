@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.board.controller;
 
-import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.common.dto.ResponseDto;
 import com.myprecious.moneyglove.domain.board.service.BoardService;
 import com.myprecious.moneyglove.domain.board.dto.request.BoardRequest;
 import com.myprecious.moneyglove.domain.board.dto.response.BoardDDayResponse;

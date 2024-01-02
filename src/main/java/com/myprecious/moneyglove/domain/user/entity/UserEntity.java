@@ -1,6 +1,6 @@
 package com.myprecious.moneyglove.domain.user.entity;
 
-import com.myprecious.moneyglove.common.BaseEntity;
+import com.myprecious.moneyglove.common.entity.BaseEntity;
 import com.myprecious.moneyglove.domain.board.entity.BoardEntity;
 import com.myprecious.moneyglove.domain.debt.entity.DebtEntity;
 import com.myprecious.moneyglove.domain.user.dto.request.UserUpdateRequest;
