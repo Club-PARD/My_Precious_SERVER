@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,11 @@ public class BoardService {
         try {
             UserEntity user = userRepository.findByUid(uid);
 
+            if (user == null) {
+                // 유저가 없으면 글 작성을 막음
+                return ResponseDto.setFailed("User not found. Cannot create posting.");
+            }
+
             BoardEntity board = BoardEntity.builder()
                     .title(request.getTitle())
                     .situation(request.getSituation())
@@ -44,6 +50,7 @@ public class BoardService {
                     .dDay(PeriodDays(request.getPayDate()))
                     .user(user)
                     .build();
+
             try {
                 boardRepository.save(board);
                 BoardIdResponse result = new BoardIdResponse(board);
@@ -59,15 +66,16 @@ public class BoardService {
     }
 
     //d-day 계산
-    private Integer PeriodDays(String boardpayDate) {
+    private Long PeriodDays(String boardpayDate) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
         LocalDate currentDate = LocalDate.now();
-        LocalDate payDate = LocalDate.parse(boardpayDate, formatter);
-        // 날짜 차이 계산
-        Period period = Period.between(currentDate, payDate);
 
-        return period.getDays();
+        LocalDate payDate = LocalDate.parse(boardpayDate, formatter);
+
+        // 날짜 차이 계산
+//        Period period = Period.between(currentDate, payDate);
+        return ChronoUnit.DAYS.between(currentDate,payDate);
     }
 
     public ResponseDto<List<BoardResponse>> findAll(String uid) {

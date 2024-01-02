@@ -7,5 +7,5 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     List<BoardEntity> findByUser_Uid(String uid);
     List<BoardEntity> findByBoardStatus(BoardEntity.BoardStatus boardStatus);
-    List<BoardEntity> findBydDay(Integer dDay);
+    List<BoardEntity> findBydDay(Long dDay);
 }
