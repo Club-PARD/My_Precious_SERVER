@@ -11,7 +11,7 @@ public class BoardSimpleResponse {
     private String payDate;
     private String bank;
     private String bankAccount;
-    private UserSimpleResponse userSimpleResponse;
+    private UserSimpleResponse user;
 
     public BoardSimpleResponse(BoardEntity board) {
         this.title = board.getTitle();
@@ -19,6 +19,6 @@ public class BoardSimpleResponse {
         this.payDate = board.getPayDate();
         this.bank = board.getBank();
         this.bankAccount = board.getBankAccount();
-        this.userSimpleResponse = new UserSimpleResponse(board.getUser());
+        this.user = new UserSimpleResponse(board.getUser());
     }
 }
