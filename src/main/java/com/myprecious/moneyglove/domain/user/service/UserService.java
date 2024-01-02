@@ -35,7 +35,7 @@ public class UserService {
             return ResponseDto.setFailed("Database error");
         }
     }
-    
+
     public ResponseDto<List<UserResponse>> findAll() {
         List<UserResponse> userResponses;
         try {
