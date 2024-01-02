@@ -35,8 +35,7 @@ public class UserService {
             return ResponseDto.setFailed("Database error");
         }
     }
-
-    // 전체 club list 출력
+    
     public ResponseDto<List<UserResponse>> findAll() {
         List<UserResponse> userResponses;
         try {
@@ -55,21 +54,29 @@ public class UserService {
 
     @Transactional
     public ResponseDto<UserEntity> updateUser(String uId, UserUpdateRequest request) {
-        UserEntity user;
         try {
-            user = userRepository.findByUid(uId);
-            if (!userRepository.existsById(uId)) {
+            UserEntity user = userRepository.findByUid(uId);
+            if (user == null) {
                 return ResponseDto.setFailed("해당 이름의 유저가 없습니다.");
             }
-            if (!StringUtils.hasText(request.getName()))
-                user.setName(request.getName()); //이름 수정
-            if (isBirth(request))
-                user.setBirth(request.getBirth()); // 생일 수정
-            if (request.getPhoneNum() != null)
-                user.setPhoneNum(request.getPhoneNum()); // 생일 수정
-            user.update(request);
-            return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", user);
 
+            // 이름, 생일, 전화번호 중 하나라도 값이 없으면 업데이트를 허용하지 않음
+            if (!StringUtils.hasText(request.getName()) || !isBirth(request) || !StringUtils.hasText(request.getPhoneNum())) {
+                return ResponseDto.setFailed("이름, 생일, 전화번호는 필수 값입니다.");
+            }
+
+            if (StringUtils.hasText(request.getName())) {
+                user.setName(request.getName()); // 이름 수정
+            }
+            if (isBirth(request)) {
+                user.setBirth(request.getBirth()); // 생일 수정
+            }
+            if (StringUtils.hasText(request.getPhoneNum())) {
+                user.setPhoneNum(request.getPhoneNum()); // 전화번호 수정
+            }
+            user.update(request);
+
+            return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", user);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
