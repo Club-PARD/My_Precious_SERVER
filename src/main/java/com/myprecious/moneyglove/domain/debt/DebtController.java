@@ -3,10 +3,7 @@ package com.myprecious.moneyglove.domain.debt;
 import com.myprecious.moneyglove.common.ResponseDto;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtStatusRequest;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtIdResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusResponse;
+import com.myprecious.moneyglove.domain.debt.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +51,12 @@ public class DebtController {
     @GetMapping("/{debtId}")
     public ResponseDto<DebtResponse> findone(@PathVariable Long debtId){
         ResponseDto<DebtResponse> result = debtService.findOne(debtId);
+        return result;
+    }
+
+    @GetMapping("/confirmedDebts/{boardId}")
+    public ResponseDto<List<ConfirmedDebtResponse>> getConfirmedDebts(@PathVariable Long boardId){
+        ResponseDto<List<ConfirmedDebtResponse>> result = debtService.getConfirmedDebt(boardId);
         return result;
     }
 }

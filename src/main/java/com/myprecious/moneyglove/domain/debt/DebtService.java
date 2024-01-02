@@ -3,10 +3,8 @@ package com.myprecious.moneyglove.domain.debt;
 import com.myprecious.moneyglove.domain.board.BoardEntity;
 import com.myprecious.moneyglove.domain.board.BoardRepository;
 import com.myprecious.moneyglove.domain.debt.dto.request.DebtRequest;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtIdResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.DebtStatusResponse;
-import com.myprecious.moneyglove.domain.debt.dto.response.RepaymentStatusResponse;
+import com.myprecious.moneyglove.domain.debt.dto.response.*;
+import com.myprecious.moneyglove.domain.mail.MailService;
 import com.myprecious.moneyglove.domain.user.UserEntity;
 import com.myprecious.moneyglove.domain.user.UserRepository;
 import com.myprecious.moneyglove.common.ResponseDto;
@@ -24,12 +22,15 @@ public class DebtService {
     private final DebtRepository debtRepository;
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final MailService mailService;
 
     @Autowired
-    public DebtService(DebtRepository debtRepository, BoardRepository boardRepository, UserRepository userRepository) {
+    public DebtService(DebtRepository debtRepository, BoardRepository boardRepository,
+                       UserRepository userRepository, MailService mailService) {
         this.debtRepository = debtRepository;
         this.boardRepository = boardRepository;
         this.userRepository = userRepository;
+        this.mailService = mailService;
     }
 
     public ResponseDto<DebtIdResponse> createDebt(String uId, Long boardId, DebtRequest request) {
@@ -48,6 +49,9 @@ public class DebtService {
             try {
                 debtRepository.save(debt);
                 DebtIdResponse result = new DebtIdResponse(debt);
+
+                mailService.lentMoney(board.getUser().getGmailId());
+
                 return ResponseDto.setSuccess("친구 응원 성공", result);
             } catch (Exception e) {
                 log.error("실패!: {}", e);
@@ -104,15 +108,14 @@ public class DebtService {
     }
 
     private void updateBoardStatus(BoardEntity board) {
-        // Board의 모든 Debt가 PAID 상태이고, RepaymentStatus가 모두 CONFIRMED 상태인지 확인
         boolean allDebtsPaidAndConfirmed = board.getDebts().stream()
                 .allMatch(debt -> debt.getDebtStatus() == DebtEntity.DebtStatus.PAID
                         && debt.getRepaymentStatus() == DebtEntity.RepaymentStatus.CONFIRMED);
 
-        // 만약 모든 Debt가 PAID 상태이고, RepaymentStatus가 모두 CONFIRMED 상태이면 Board의 statuses를 업데이트
         if (allDebtsPaidAndConfirmed) {
             board.setBoardStatus(BoardEntity.BoardStatus.PAIDALL);
             boardRepository.save(board);
+            mailService.paidAll(board.getUser().getGmailId());
         }
     }
 
@@ -125,6 +128,8 @@ public class DebtService {
 
             // 변경된 상태를 데이터베이스에 반영합니다.
             debtRepository.save(debt);
+
+            mailService.paidOne(debt.getUser().getGmailId());
 
             // 변경된 상태에 대한 응답을 생성합니다.
             DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
@@ -167,6 +172,28 @@ public class DebtService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseDto.setFailed("데이터 베이스 오류");
+        }
+    }
+
+    public ResponseDto<List<ConfirmedDebtResponse>> getConfirmedDebt(@PathVariable Long boardId){
+        try{
+            List<DebtEntity> debts = debtRepository.findByBoardId(boardId);
+
+            List<ConfirmedDebtResponse> confirmedDebtResponses = debts.stream()
+                    .filter(debt -> debt.getRepaymentStatus() == DebtEntity.RepaymentStatus.CONFIRMED)
+                    .map(ConfirmedDebtResponse::new)
+                    .collect(Collectors.toList());
+
+            int total = confirmedDebtResponses.size();
+
+            if (total == 0) {
+                return ResponseDto.setFailed("해당하는 confirmedDebtResponse가 없습니다.");
+            }
+
+            return ResponseDto.setSuccess("작성한 글 목록입니다.", confirmedDebtResponses, total);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("데이터베이스 오류");
         }
     }
 }
