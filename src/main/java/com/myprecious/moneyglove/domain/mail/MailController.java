@@ -1,23 +1,23 @@
 package com.myprecious.moneyglove.domain.mail;
 
+import com.myprecious.moneyglove.common.ResponseDto;
+import com.myprecious.moneyglove.domain.user.UserEntity;
+import com.myprecious.moneyglove.domain.user.UserRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@AllArgsConstructor
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("api/v9")
 public class MailController {
     private final MailService mailService;
 
-    @GetMapping("/mail")
-    public String dispMail() {
-        return "mail";
+    @PostMapping("/mails")
+    public ResponseDto<MailResponseDto> mailSend(@RequestBody MailDto mailDto) {
+        ResponseDto<MailResponseDto> result = mailService.mailSend(mailDto);
+        return result;
     }
 
-    @PostMapping("/mail")
-    public void execMail(MailDto mailDto) {
-        // 메일 발송
-        mailService.mailSend(mailDto);
-    }
 }
