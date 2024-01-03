@@ -18,7 +18,7 @@ public class BoardResponse {
     private String payWay;
     private String bank;
     private String bankAccount;
-    private Long dDay;
+    private Integer dDay;
     private BoardEntity.BoardStatus boardStatus;
     private UserSimpleResponse user;
     private List<DebtLendMoneyResponse> debts;

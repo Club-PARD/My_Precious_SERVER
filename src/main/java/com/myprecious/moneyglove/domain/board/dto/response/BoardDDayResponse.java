@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardDDayResponse {
-    private Long DDay;
+    private Integer DDay;
 
     public BoardDDayResponse(BoardEntity boardEntity){
         this.DDay = boardEntity.getDDay();

@@ -67,7 +67,7 @@ public class BoardService {
     }
 
     //d-day 계산
-    private Long PeriodDays(String boardpayDate) {
+    private Integer PeriodDays(String boardpayDate) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
         LocalDate currentDate = LocalDate.now();
@@ -76,7 +76,7 @@ public class BoardService {
 
         // 날짜 차이 계산
 //        Period period = Period.between(currentDate, payDate);
-        return ChronoUnit.DAYS.between(currentDate,payDate);
+        return Math.toIntExact(ChronoUnit.DAYS.between(currentDate, payDate));
     }
 
     public ResponseDto<List<BoardResponse>> findAll(String uid) {

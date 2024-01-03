@@ -31,6 +31,7 @@ public class MailService {
 
             mailHandler.setTo(mailDto.getAddress());
             mailHandler.setFrom(MailService.FROM_ADDRESS);
+
             mailHandler.setSubject(mailDto.getTitle());
             String htmlContent = "<p>" + mailDto.getMessage() +
                     "혀튼 여기에 링크가 들어갈 것<p><a href=\"\">Visit our website</a></p>";
