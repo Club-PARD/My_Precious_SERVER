@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v9")
+@RequestMapping("api/v23")
 public class MailController {
     private final MailService mailService;
 

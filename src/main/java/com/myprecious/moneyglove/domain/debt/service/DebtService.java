@@ -37,8 +37,14 @@ public class DebtService {
 
     public ResponseDto<DebtIdResponse> createDebt(String uId, Long boardId, DebtRequest request) {
         UserEntity user = userRepository.findByUid(uId);
-        BoardEntity board = boardRepository.findById(boardId).get();
+
+        if (user == null) {
+            // 유저가 없으면 글 작성을 막음
+            return ResponseDto.setFailed("User not found. Cannot create posting.");
+        }
+
         try {
+            BoardEntity board = boardRepository.findById(boardId).get();
 
             DebtEntity debt = DebtEntity.builder()
                     .lendMoney(request.getLendMoney())
@@ -67,10 +73,8 @@ public class DebtService {
 
     public ResponseDto<List<DebtResponse>> findAllByBoard(Long boardId) {
         try {
-            // boardId를 기반으로 해당 보드에 작성된 모든 응원 기록
             List<DebtEntity> debts = debtRepository.findByBoardId(boardId);
 
-            // 찾은 글들을 ResponseDto로 변환
             List<DebtResponse> debtResponses = debts.stream()
                     .map(DebtResponse::new)
                     .collect(Collectors.toList());
@@ -89,10 +93,8 @@ public class DebtService {
 
     public ResponseDto<List<DebtResponse>> findAllByUser(String uId) {
         try {
-            // userId를 기반으로 해당 user가 작성한 모든 응원 기록
             List<DebtEntity> debts = debtRepository.findByUser_Uid(uId);
 
-            // 찾은 글들을 ResponseDto로 변환
             List<DebtResponse> debtResponses = debts.stream()
                     .map(DebtResponse::new)
                     .collect(Collectors.toList());
@@ -124,19 +126,12 @@ public class DebtService {
     public ResponseDto<DebtStatusResponse> markDebtAsPaid(Long debtId) {
         try {
             DebtEntity debt = debtRepository.findById(debtId).get();
-
-            // debtStatus를 PAID로 변경합니다.
             debt.setDebtStatus(DebtEntity.DebtStatus.PAID);
-
-            // 변경된 상태를 데이터베이스에 반영합니다.
             debtRepository.save(debt);
 
             mailService.paidOne(debt.getUser().getGmailId());
 
-            // 변경된 상태에 대한 응답을 생성합니다.
             DebtStatusResponse debtStatusResponse = new DebtStatusResponse(debt);
-
-            // 성공적인 응답을 반환합니다.
             return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", debtStatusResponse);
 
         } catch (Exception e) {
@@ -149,15 +144,11 @@ public class DebtService {
         try {
             DebtEntity debt = debtRepository.findById(debtId).get();
             debt.setRepaymentStatus(DebtEntity.RepaymentStatus.CONFIRMED);
-
-            // 변경된 상태를 데이터베이스에 반영
             debtRepository.save(debt);
 
-            // 변경된 상태에 대한 응답을 생성
             RepaymentStatusResponse repaymentStatusResponse = new RepaymentStatusResponse(debt);
             updateBoardStatus(debt.getBoard());
 
-            // 성공적인 응답을 반환
             return ResponseDto.setSuccess("성공적으로 업데이트 되었습니다", repaymentStatusResponse);
 
         } catch (Exception e) {
@@ -170,6 +161,7 @@ public class DebtService {
         try {
             DebtEntity debtEntity = debtRepository.findById(id).get();
             DebtResponse debtResponse = new DebtResponse(debtEntity);
+
             return ResponseDto.setSuccess("해당 게시물 찾기 성공!", debtResponse);
         } catch (Exception e) {
             e.printStackTrace();

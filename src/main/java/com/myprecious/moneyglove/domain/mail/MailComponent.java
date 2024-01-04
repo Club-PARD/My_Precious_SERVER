@@ -7,6 +7,7 @@ import com.myprecious.moneyglove.domain.mail.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Slf4j
@@ -20,9 +21,9 @@ public class MailComponent {
         this.boardRepository = boardRepository;
     }
 
-//    @Scheduled(cron = "0 0 0 * * *") 정각
-        @Scheduled(fixedRate = 30000)
-            public void updateDday() {
+    //    @Scheduled(cron = "0 0 0 * * *") 정각
+    @Scheduled(fixedRate = 20000)
+    public void updateDday() {
         List<BoardEntity> boards = boardRepository.findByBoardStatus(BoardEntity.BoardStatus.NOTYET);
 
         for (BoardEntity board : boards) {
@@ -30,22 +31,23 @@ public class MailComponent {
             boardRepository.save(board);
         }
     }
-//    @Scheduled(cron = 0 22 * * * *)
-    @Scheduled(fixedRate = 30000)
+
+    //    @Scheduled(cron = 0 22 * * * *)
+    @Scheduled(fixedRate = 20000)
     public void scheduledMailSending() {
         sendMailForDday(3, "[D-3] 돈이 생겼다면 차근차근 갚아가세요.",
                 "안녕하세요. 머니글러브입니다.\n" +
-                "만약 현재 조금이라도 여유돈이 생겼다면 돈을 빌려준 친구들 한명한명씩 갚아보세요!\n" +
-                "나중에 한번에 갚으려면 힘들 수도 있어요.");
+                        "만약 현재 조금이라도 여유돈이 생겼다면 돈을 빌려준 친구들 한명한명씩 갚아보세요!\n" +
+                        "나중에 한번에 갚으려면 힘들 수도 있어요.");
 
         sendMailForDday(0, "[D-day] 오늘은 돈을 모두 갚기로 한 날짜에요. 책임감 있는 모습을 기대할게요.",
                 "안녕하세요. 머니글러브입니다.\n" +
-                "\n" +
-                "오늘은 돈을 갚기로 약속한 날짜입니다!\n" +
-                "\n" +
-                "머글님을 도와준 친구들은 머글님께서 힘들 때 머글님을 생각해준 소중한 친구입니다.\n" +
-                "\n" +
-                "이런 소중한 친구들과의 관계를 지키기 위해서는 약속을 지키는 것은 필수겠죠?");
+                        "\n" +
+                        "오늘은 돈을 갚기로 약속한 날짜입니다!\n" +
+                        "\n" +
+                        "머글님을 도와준 친구들은 머글님께서 힘들 때 머글님을 생각해준 소중한 친구입니다.\n" +
+                        "\n" +
+                        "이런 소중한 친구들과의 관계를 지키기 위해서는 약속을 지키는 것은 필수겠죠?");
 
         sendMailForDday(-1, "[D+1] 친구들의 신뢰가 깎이고 있어요. 문제가 생기기 전에 얼른 돈을 갚아주세요.",
                 "안녕하세요. 머니글러브입니다.\n" +

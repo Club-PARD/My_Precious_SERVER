@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v9/debts") // 공통되는 URL 묶기.
+@RequestMapping("/api/v23/debts") // 공통되는 URL 묶기.
 public class DebtController {
 
     private final DebtService debtService;
