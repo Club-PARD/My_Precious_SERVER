@@ -9,9 +9,11 @@ import com.myprecious.moneyglove.domain.board.dto.response.BoardResponse;
 import com.myprecious.moneyglove.domain.user.entity.UserEntity;
 import com.myprecious.moneyglove.domain.user.repository.UserRepository;
 import com.myprecious.moneyglove.common.dto.ResponseDto;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +42,11 @@ public class BoardService {
                 return ResponseDto.setFailed("User not found. Cannot create posting.");
             }
 
+            // 입력값이 비어있는지 확인
+            if (isRequestInvalid(request)) {
+                return ResponseDto.setFailed("Invalid input. Cannot create posting.");
+            }
+
             BoardEntity board = BoardEntity.builder()
                     .title(request.getTitle())
                     .situation(request.getSituation())
@@ -66,6 +73,16 @@ public class BoardService {
         }
     }
 
+    private boolean isRequestInvalid(BoardRequest request) {
+        return !StringUtils.hasText(request.getTitle()) ||
+                !StringUtils.hasText(request.getSituation()) ||
+                !StringUtils.hasText(request.getPayDate()) ||
+                !StringUtils.hasText(request.getBorrowMoney())||
+                !StringUtils.hasText(request.getBank()) ||
+                !StringUtils.hasText(request.getBankAccount());
+    }
+    //!StringUtils.hasText(request.getPayWay()) ||
+
     //d-day 계산
     private Integer PeriodDays(String boardpayDate) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -74,8 +91,6 @@ public class BoardService {
 
         LocalDate payDate = LocalDate.parse(boardpayDate, formatter);
 
-        // 날짜 차이 계산
-//        Period period = Period.between(currentDate, payDate);
         return Math.toIntExact(ChronoUnit.DAYS.between(currentDate, payDate));
     }
 
@@ -123,4 +138,80 @@ public class BoardService {
         }
     }
 
+    public ResponseDto<BoardIdResponse> updateBoard(Long boardId, BoardRequest boardRequest) {
+        try {
+            BoardEntity boardEntity = boardRepository.findById(boardId).get();
+
+            if (isDebtsEmpty(boardEntity)) {
+
+                if (!isTitleEmpty(boardRequest))
+                    boardEntity.setTitle(boardRequest.getTitle());
+
+                if (StringUtils.hasText(boardRequest.getSituation()))
+                    boardEntity.setSituation(boardRequest.getSituation());
+
+                if (!isPayWayEmpty(boardRequest))
+                    boardEntity.setPayWay(boardRequest.getPayWay());
+
+                if (StringUtils.hasText(boardRequest.getPayDate()))
+                    boardEntity.setPayDate(boardRequest.getPayDate());
+
+                if (!isBorrowMoneyEmpty(boardRequest))
+                    boardEntity.setBorrowMoney(boardRequest.getBorrowMoney());
+
+                if (!isBankEmpty(boardRequest))
+                    boardEntity.setBank(boardRequest.getBank());
+
+                if (StringUtils.hasText(boardRequest.getBankAccount()))
+                    boardEntity.setBankAccount(boardRequest.getBankAccount());
+
+                boardRepository.save(boardEntity);
+
+                BoardIdResponse boardIdResponse = new BoardIdResponse(boardEntity);
+                return ResponseDto.setSuccess("품목이 업데이트 되었습니다", boardIdResponse);
+            }
+            log.info("debts : {}", boardEntity.getDebts());
+            return ResponseDto.setFailed("board에 작성된 debt가 있습니다");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseDto.setFailed("DB 오류");
+        }
+    }
+
+    private static boolean isDebtsEmpty(BoardEntity boardEntity) {
+        return boardEntity.getDebts().isEmpty();
+    }
+
+    private static boolean isBankEmpty(BoardRequest boardRequest) {
+        return boardRequest.getBank().isEmpty();
+    }
+
+    private static boolean isBorrowMoneyEmpty(BoardRequest boardRequest) {
+        return boardRequest.getBorrowMoney().isEmpty();
+    }
+
+    private static boolean isPayWayEmpty(BoardRequest boardRequest) {
+        return boardRequest.getPayWay().isEmpty();
+    }
+
+    private static boolean isTitleEmpty(BoardRequest boardRequest) {
+        return boardRequest.getTitle().isEmpty();
+    }
+
+    public ResponseDto<?> deleteBoard(Long boardId) {
+        try {
+            BoardEntity boardEntity = boardRepository.findById(boardId).get();
+
+            if (isDebtsEmpty(boardEntity)) {
+                if (boardRepository.existsById(boardId)) {
+                    boardRepository.deleteById(boardId);
+                    return ResponseDto.setSuccess("삭제 되었습니다.", null);
+                }
+            }
+            return ResponseDto.setFailed("debt있음"); // 리스트에 있는 ID인지 확인
+        } catch (Exception e) {
+            return ResponseDto.setFailed("존재하지 않는 id입니다"); // 리스트에 있는 ID인지 확인
+        }
+    }
 }

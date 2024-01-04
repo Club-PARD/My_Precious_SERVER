@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v9/boards") // 공통되는 URL 묶기.
+@RequestMapping("/api/v23/boards") // 공통되는 URL 묶기.
 public class BoardController {
 
     private final BoardService boardService;
@@ -39,6 +39,18 @@ public class BoardController {
     @GetMapping("/d-day/{boardId}")
     public ResponseDto<BoardDDayResponse> returnDDay(@PathVariable Long boarId){
         ResponseDto<BoardDDayResponse> result = boardService.returnDDay(boarId);
+        return result;
+    }
+
+    @PatchMapping("/{boardId}")
+    public ResponseDto<BoardIdResponse> updateItem(@PathVariable Long boardId, @RequestBody BoardRequest request) {
+        ResponseDto<BoardIdResponse> result = boardService.updateBoard(boardId, request);
+        return result;
+    }
+
+    @DeleteMapping("/{boardId}")
+    public ResponseDto<?> deleteBoard(@PathVariable Long boardId) {
+        ResponseDto<?> result = boardService.deleteBoard(boardId);
         return result;
     }
 }
