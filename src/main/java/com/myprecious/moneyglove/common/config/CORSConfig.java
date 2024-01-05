@@ -18,7 +18,7 @@ public class CORSConfig {
                 //for develop
                 corsRegistry
                         .addMapping("/**")
-                        .allowedOrigins("https://precious-relationship.web.app")
+                        .allowedOrigins("https://precious-relationship.web.app", "http://localhost:3000")
                         .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTION");
             }
         };
