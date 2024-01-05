@@ -129,6 +129,6 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 - npm i recoil
 
 ## 🖥️
-<img src="./images/diagram.png" height="50%">
+<img src="./images/diagram.png" height="25%">
 <img src = "./images/controller.png" height="100%">
 
