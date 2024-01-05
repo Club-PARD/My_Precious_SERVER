@@ -6,6 +6,7 @@
 #### "친구 간의 채무관계는 돈도 잃고 우정도 잃는다? MoneyGlove를 통해 돈도 지키고 우정도 지키자!"
 <br>
 MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관계를 채결·관리하고, 알람 기능을 통해 채권자와 채무자 사이의 상황을 쉽게 공유하여 채무관계에서 일어나는 불편함을 간편하게 해결할 수 있는 서비스입니다. <br><br>
+  <img width="40%" height="auto" src=./images/1.png alt="Money Glove">
 
 + 채무자는 글을 작성하여 링크를 통해 친구들에게 작성한 글을 공유하고, 기록된 채무기록을 관리할 수 있습니다.
 + 채권자는 공유받은 링크를 통해 글을 확인하고 채무기록을 남길 수 있습니다.
@@ -49,7 +50,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white">
-<img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=white">gi
+<img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/Aws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
@@ -58,6 +59,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 ## 📄 [페이지별 기능](#-페이지별-기능)
 
 ### [온보딩]
+
 ### [로그인]
 - 구글 로그인을 통해 로그인을 진행합니다.
     - 회원가입을 한 적 있는 경우 : 구글 로그인이 성공하면 데시보드(홈 화면)로 이동합니다.
@@ -126,6 +128,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 - npm i react-modal
 - npm i recoil
 
-
-## 🚩 [설치 방법](#-설치-방법)
+## 🖥️
+<img src="./images/diagram.png" height="50%">
+<img src = "./images/controller.png" height="100%">
 
