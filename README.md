@@ -33,7 +33,7 @@ MoneyGlove는 크라우드 펀딩 형식을 통해 친구 간의 1:n 채무 관�
 |**이름**|        [김현중](https://github.com/hjkim0905)        |                [박민지](https://github.com/minzziPark)                 | [이유현](https://github.com/LYH513) | [김채린](https://github.com/seizethedaylyn) |                                                                                                                                             장동원                                                                                                                                             |김현지|
 |**나이**|                        26                         |                                 25                                  |                23                |                    24                    |                                                                                                                                             23                                                                                                                                              |25|
 
-# [🔥My Precious Web Repository🔥](git@github.com:Club-PARD/My_Precious_WEB.git)
+# [🔥My Precious Web Repository🔥](https://github.com/Club-PARD/My_Precious_WEB)
 
 ## ✅ [Stack](#-stack)
 ### 프론트엔드
