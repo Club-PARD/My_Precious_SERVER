@@ -34,8 +34,9 @@ public class MailService {
 
             mailHandler.setSubject(mailDto.getTitle());
             String htmlContent = "<p>" + mailDto.getMessage() +
-                    "혀튼 여기에 링크가 들어갈 것<p><a href=\"\">Visit our website</a></p>";
+                    "<p><a href=\"https://precious-relationship.web.app\">Money Glove</a></p>";
             mailHandler.setText(htmlContent, true);
+
 
             mailHandler.send();
 
@@ -57,17 +58,18 @@ public class MailService {
             mailHandler.setTo(userAddress);
             mailHandler.setFrom(MailService.FROM_ADDRESS);
             mailHandler.setSubject("[MoneyGlove] 친구가 돈을 빌려줬어요! 힘들 때 도와준 친구에게 편지로 고마움을 표현해주세요.");
-            String htmlContent = "<p>" + "안녕하세요. 머니글러브입니다.\n" +
-                    "\n" +
-                    "친구가 돈을 빌려줬어요! \n" +
-                    "\n" +
-                    "지금 게시물 관리 페이지로 이동하여 확인하고 감사편지를 보내보세요.\n" +
-                    "\n" +
-                    "감사편지 한장이 머글님의 친구들에게 큰 기쁨이 될거예요.\n" +
-                    "\n" +
-                    "[만약 빌려준 돈과 실제로 계좌에 들어온 금액이 다르다면 moneyglove2024@gmail.com로 문의주세요.]" +
-                    "혀튼 여기에 링크가 들어갈 것임<p><a href=\"\">Visit our website</a></p>";
+
+            String htmlContent = "<html><body>" +
+                    "<p>안녕하세요. 머니글러브입니다.</p>" +
+                    "<p>친구가 돈을 빌려줬어요!</p>" +
+                    "<p>지금 게시물 관리 페이지로 이동하여 확인하고 감사편지를 보내보세요.</p>" +
+                    "<p>감사편지 한장이 머글님의 친구들에게 큰 기쁨이 될거예요.</p>" +
+                    "<p>[만약 빌려준 돈과 실제로 계좌에 들어온 금액이 다르다면 moneyglove2024@gmail.com로 문의주세요.]</p>" +
+                    "<p><a href=\"https://precious-relationship.web.app\">Money Glove</a></p>" +
+                    "</body></html>";
+
             mailHandler.setText(htmlContent, true);
+
 
             mailHandler.send();
             UserSendMailResponseDTO userSendMailResponseDTO = new UserSendMailResponseDTO(userAddress);
@@ -86,17 +88,18 @@ public class MailService {
             mailHandler.setTo(userAddress);
             mailHandler.setFrom(MailService.FROM_ADDRESS);
             mailHandler.setSubject("[MoneyGlove] 모든 돈을 갚으셨군요! 축하합니다.");
-            String htmlContent = "<p>" + "안녕하세요. 머니글러브입니다.\n" +
-                    "\n" +
-                    "빌린 모든 금액을 갚으셨습니다. \n" +
-                    "\n" +
-                    "머글님의 친구관계를 지키기 위한 책임감 있는 모습에 박수를 보내드립니다!!!\n" +
-                    "\n" +
-                    "한때 힘들었던 시간 함께 도와줬던 친구들에게 감사하다고 한번 더 말해보는 것은 어떨까요?\n" +
-                    "\n" +
-                    "지금까지 “돈도 지키고 우정도 지키자!” MoneyGlove를 이용해주셔서 감사합니다.\n"+
-                    "혀튼 여기에 링크가 들어갈 것임<p><a href=\"\">Visit our website</a></p>";
+
+            String htmlContent = "<html><body>" +
+                    "<p>안녕하세요. 머니글러브입니다.</p>" +
+                    "<p>빌린 모든 금액을 갚으셨습니다.</p>" +
+                    "<p>머글님의 친구관계를 지키기 위한 책임감 있는 모습에 박수를 보내드립니다!!!</p>" +
+                    "<p>한때 힘들었던 시간 함께 도와줬던 친구들에게 감사하다고 한번 더 말해보는 것은 어떨까요?</p>" +
+                    "<p>지금까지 “돈도 지키고 우정도 지키자!” MoneyGlove를 이용해주셔서 감사합니다.</p>" +
+                    "<p><a href=\"https://precious-relationship.web.app\">Money Glove</a></p>" +
+                    "</body></html>";
+
             mailHandler.setText(htmlContent, true);
+
 
             mailHandler.send();
             UserSendMailResponseDTO userSendMailResponseDTO = new UserSendMailResponseDTO(userAddress);
@@ -115,14 +118,15 @@ public class MailService {
             mailHandler.setTo(userAddress);
             mailHandler.setFrom(MailService.FROM_ADDRESS);
             mailHandler.setSubject("[MoneyGlove] 친구가 돈을 갚았다고 합니다. 확인해주세요");
-            String htmlContent = "<p>" + "안녕하세요. 머니글러브입니다.\n" +
-                    "\n" +
-                    "친구가 돈을 갚았다고 합니다. \n" +
-                    "\n" +
-                    "지금 바로 확인 후에 확인 버튼을 눌러주세요!!\n" +
-                    "\n" +
-                    "MoneyGlove를 통해 친구와 꾸준히 소통해보아요 희힣ㅅ.\n"+
-                            "혀튼 여기에 링크가 들어갈 것임<p><a href=\"\">Visit our website</a></p>";
+
+            String htmlContent = "<html><body>" +
+                    "<p>안녕하세요. 머니글러브입니다.</p>" +
+                    "<p>친구가 돈을 갚았다고 합니다.</p>" +
+                    "<p>지금 바로 확인 후에 확인 버튼을 눌러주세요!!</p>" +
+                    "<p>MoneyGlove를 통해 친구와 꾸준히 소통해보아요 희힣ㅅ.</p>" +
+                    "<p><a href=\"https://precious-relationship.web.app\">Money Glove</a></p>" +
+                    "</body></html>";
+
             mailHandler.setText(htmlContent, true);
 
             mailHandler.send();
