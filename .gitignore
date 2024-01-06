@@ -27,4 +27,3 @@ src/main/resources/application.properties
 .DS_Store
 build/
 .idea/
-images
